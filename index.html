@@ -3,7 +3,11 @@
     <head>
         <script type ="text/javascript" src="index.js"></script>
     </head>
-    <body>
-        <button onclick="test('hey')">테스트</button>
+    <body onload="Open()">
+        <div>Gold : <em id="item_gold"></em></div>
+        <button onclick="AddGold(1)">골드 올리기</button>
+        <button onclick="AddGold(-1)">골드 내리기</button>
+        <br />
+        <button onclick="AddGold_Auto()">골드 자동으로 올리기</button>
     </body>
 </html>
