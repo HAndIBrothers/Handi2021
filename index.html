@@ -5,38 +5,40 @@
         <link rel="stylesheet" href="main.css" />
     </head>
     <body onload="Open()">
-        
         <h3>Item</h3>
         <div>Metal : <em id="item_metal"></em></div>
         <div>Plastic : <em id="item_plastic"></em></div>
         <div>Glass : <em id="item_glass"></em></div>
         <div>RubberTree : <em id="item_rubber_tree"></em></div>
         <div>Tree : <em id="item_tree"></em></div>
-        
-        <h3>Compound</h3>
-        <div>Steel : <em id="compound_steel"></em></div>
-        <div>Fiber : <em id="compound_fiber"></em></div>
-        <div>Fuel : <em id="compound_fuel"></em></div>
-        
-        <h3>Collect</h3>
         <button onclick="GoToRiver()">강가</button>
         <button onclick="GoToMountain()">산</button>
         <button onclick="GoToCity()">도시</button>
         
         <h3>Compound</h3>
+        <div>Steel : <em id="compound_steel"></em></div>
+        <div>Fiber : <em id="compound_fiber"></em></div>
+        <div>Fuel : <em id="compound_fuel"></em></div>
         <button onclick="CompoundItem()">가공</button>
         
-        <h3>Rocket</h3>
-        <button onclick="">left</button>
+        <h3>Rocket Input</h3>
+        <button onclick="InputSteel_Add(-1)">left</button>
         <span>Steel : <em id="input_steel"></em></span>
-        <button onclick="">right</button>
+        <button onclick="InputSteel_Add(1)">right</button>
         <br />
-        <button onclick="">left</button>
+        <button onclick="InputFiber_Add(-1)">left</button>
         <span>Fiber : <em id="input_fiber"></em></span>
-        <button onclick="">right</button>
+        <button onclick="InputFiber_Add(1)">right</button>
         <br />
-        <button onclick="">left</button>
+        <button onclick="InputFuel_Add(-1)">left</button>
         <span>Fuel : <em id="input_fuel"></em></span>
-        <button onclick="">right</button>
+        <button onclick="InputFuel_Add(1)">right</button>
+        <br />
+        <button onclick="BuildRocket()">로켓 제작</button>
+        
+        <h3>Rocket</h3>
+        <span>Percent : <em id="percent_rocket"></em>%</span>
+        <button onclick="LaunchRocket()">로켓 발사</button>
+        <div><em id="result_rocket"></em></div>
     </body>
 </html>
