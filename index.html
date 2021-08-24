@@ -1,13 +1,42 @@
 ﻿<!DOCTYPE html>
 <html>
     <head>
-        <script type ="text/javascript" src="index.js"></script>
+        <script type ="text/javascript" src="main.js"></script>
+        <link rel="stylesheet" href="main.css" />
     </head>
     <body onload="Open()">
-        <div>Gold : <em id="item_gold"></em></div>
-        <button onclick="AddGold(1)">골드 올리기</button>
-        <button onclick="AddGold(-1)">골드 내리기</button>
+        
+        <h3>Item</h3>
+        <div>Metal : <em id="item_metal"></em></div>
+        <div>Plastic : <em id="item_plastic"></em></div>
+        <div>Glass : <em id="item_glass"></em></div>
+        <div>RubberTree : <em id="item_rubber_tree"></em></div>
+        <div>Tree : <em id="item_tree"></em></div>
+        
+        <h3>Compound</h3>
+        <div>Steel : <em id="compound_steel"></em></div>
+        <div>Fiber : <em id="compound_fiber"></em></div>
+        <div>Fuel : <em id="compound_fuel"></em></div>
+        
+        <h3>Collect</h3>
+        <button onclick="GoToRiver()">강가</button>
+        <button onclick="GoToMountain()">산</button>
+        <button onclick="GoToCity()">도시</button>
+        
+        <h3>Compound</h3>
+        <button onclick="CompoundItem()">가공</button>
+        
+        <h3>Rocket</h3>
+        <button onclick="">left</button>
+        <span>Steel : <em id="input_steel"></em></span>
+        <button onclick="">right</button>
         <br />
-        <button onclick="AddGold_Auto()">골드 자동으로 올리기</button>
+        <button onclick="">left</button>
+        <span>Fiber : <em id="input_fiber"></em></span>
+        <button onclick="">right</button>
+        <br />
+        <button onclick="">left</button>
+        <span>Fuel : <em id="input_fuel"></em></span>
+        <button onclick="">right</button>
     </body>
 </html>
