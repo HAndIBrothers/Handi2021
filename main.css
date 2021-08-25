@@ -1,3 +1,33 @@
 body {
-    background-color: skyblue;
+  background-color: skyblue;
+  display: flex;
+  flex-direction: row;
+}
+
+#field_item {
+  text-align: center;
+  width: 200px;
+  height: 200px;
+  background-color: brown;
+}
+
+#field_compound {
+  text-align: center;
+  width: 200px;
+  height: 200px;
+  background-color: cadetblue;
+}
+
+#field_input {
+  text-align: center;
+  width: 200px;
+  height: 200px;
+  background-color: darkkhaki;
+}
+
+#field_rocket {
+  text-align: center;
+  width: 200px;
+  height: 200px;
+  background-color: darkolivegreen;
 }

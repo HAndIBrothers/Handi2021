@@ -5,40 +5,48 @@
         <link rel="stylesheet" href="main.css" />
     </head>
     <body onload="Open()">
-        <h3>Item</h3>
-        <div>Metal : <em id="item_metal"></em></div>
-        <div>Plastic : <em id="item_plastic"></em></div>
-        <div>Glass : <em id="item_glass"></em></div>
-        <div>RubberTree : <em id="item_rubber_tree"></em></div>
-        <div>Tree : <em id="item_tree"></em></div>
-        <button onclick="GoToRiver()">강가</button>
-        <button onclick="GoToMountain()">산</button>
-        <button onclick="GoToCity()">도시</button>
+        <div id="field_item">
+            <h3>Item</h3>
+            <div>Metal : <em id="item_metal"></em></div>
+            <div>Plastic : <em id="item_plastic"></em></div>
+            <div>Glass : <em id="item_glass"></em></div>
+            <div>RubberTree : <em id="item_rubber_tree"></em></div>
+            <div>Tree : <em id="item_tree"></em></div>
+            <button onclick="GoToRiver()">강가</button>
+            <button onclick="GoToMountain()">산</button>
+            <button onclick="GoToCity()">도시</button>
+        </div>
         
-        <h3>Compound</h3>
-        <div>Steel : <em id="compound_steel"></em></div>
-        <div>Fiber : <em id="compound_fiber"></em></div>
-        <div>Fuel : <em id="compound_fuel"></em></div>
-        <button onclick="CompoundItem()">가공</button>
+        <div id="field_compound">
+            <h3>Compound</h3>
+            <div>Steel : <em id="compound_steel"></em></div>
+            <div>Fiber : <em id="compound_fiber"></em></div>
+            <div>Fuel : <em id="compound_fuel"></em></div>
+            <button onclick="CompoundItem()">가공</button>
+        </div>
         
-        <h3>Rocket Input</h3>
-        <button onclick="InputSteel_Add(-1)">left</button>
-        <span>Steel : <em id="input_steel"></em></span>
-        <button onclick="InputSteel_Add(1)">right</button>
-        <br />
-        <button onclick="InputFiber_Add(-1)">left</button>
-        <span>Fiber : <em id="input_fiber"></em></span>
-        <button onclick="InputFiber_Add(1)">right</button>
-        <br />
-        <button onclick="InputFuel_Add(-1)">left</button>
-        <span>Fuel : <em id="input_fuel"></em></span>
-        <button onclick="InputFuel_Add(1)">right</button>
-        <br />
-        <button onclick="BuildRocket()">로켓 제작</button>
+        <div id="field_input">
+            <h3>Rocket Input</h3>
+            <button onclick="AddInput(eCompound.steel, -1)">left</button>
+            <span>Steel : <em id="input_steel"></em></span>
+            <button onclick="AddInput(eCompound.steel, 1)"">right</button>
+            <br />
+            <button onclick="AddInput(eCompound.fiber, -1)">left</button>
+            <span>Fiber : <em id="input_fiber"></em></span>
+            <button onclick="AddInput(eCompound.fiber, 1)">right</button>
+            <br />
+            <button onclick="AddInput(eCompound.fuel, -1)">left</button>
+            <span>Fuel : <em id="input_fuel"></em></span>
+            <button onclick="AddInput(eCompound.fuel, 1)">right</button>
+            <br />
+            <button onclick="BuildRocket()">로켓 제작</button>
+        </div>
         
-        <h3>Rocket</h3>
-        <span>Percent : <em id="percent_rocket"></em>%</span>
-        <button onclick="LaunchRocket()">로켓 발사</button>
-        <div><em id="result_rocket"></em></div>
+        <div id="field_rocket">
+            <h3>Rocket</h3>
+            <span>Percent : <em id="percent_rocket"></em>%</span>
+            <button onclick="LaunchRocket()">로켓 발사</button>
+            <div><em id="result_rocket"></em></div>
+        </div>
     </body>
 </html>

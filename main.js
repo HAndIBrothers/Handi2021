@@ -90,14 +90,14 @@ function UpdateUI() {
     this.UpdateItem(eItem.tree);
     
     // :: Compound
-    this.UpdateSteel();
-    this.UpdateFiber();
-    this.UpdateFuel();
+    UpdateCompound(eCompound.steel);
+    UpdateCompound(eCompound.fiber);
+    UpdateCompound(eCompound.fuel);
     
     // :: Input
-    this.UpdateSteel_Input();
-    this.UpdateFiber_Input();
-    this.UpdateFuel_Input();
+    UpdateInput(eCompound.steel);
+    UpdateInput(eCompound.fiber);
+    UpdateInput(eCompound.fuel);
     
     // :: Rocket
     this.UpdatePercent_Rocket();
@@ -176,51 +176,133 @@ function UpdateItem(eType) {
 }
 // #endregion
 
+
+//#region Compound
+const eCompound = {
+    steel : 101,
+    fiber : 102,
+    fuel : 103
+}
+const pCompound = {
+    steel : "compound_steel",
+    fiber : "compound_fiber",
+    fuel : "compound_fuel"
+}
+function GetCompound(eType) {
+    switch(eType) {
+        case eCompound.steel:
+            return Compound.steel;
+        case eCompound.fiber:
+            return Compound.fiber;
+        case eCompound.fuel:
+            return Compound.fuel;
+    }
+}
+function AddCompound(eType, addValue) {
+    switch(eType) {
+        case eCompound.steel:
+            Compound.steel += addValue;
+            break;
+        case eCompound.fiber:
+            Compound.fiber += addValue;
+            break;
+        case eCompound.fuel:
+            Compound.fuel += addValue;
+            break;
+    }
+    UpdateCompound(eType);
+}
+function UpdateCompound(eType) {
+    var TEXT_Field;
+    switch(eType) {
+        case eCompound.steel:
+            TEXT_Field = document.getElementById(pCompound.steel);
+            break;
+        case eCompound.fiber:
+            TEXT_Field = document.getElementById(pCompound.fiber);
+            break;
+        case eCompound.fuel:
+            TEXT_Field = document.getElementById(pCompound.fuel);
+            break;
+    }
+    TEXT_Field.innerHTML = this.GetCompound(eType);
+}
+//#endregion
+
+//#region Input
+const pInput = {
+    steel : "input_steel",
+    fiber : "input_fiber",
+    fuel : "input_fuel"
+}
+function GetInput(eType) {
+    switch(eType) {
+        case eCompound.steel:
+            return Input.steel;
+        case eCompound.fiber:
+            return Input.fiber;
+        case eCompound.fuel:
+            return Input.fuel;
+    }
+}
+function AddInput(eType, addValue) {
+    switch(eType) {
+        case eCompound.steel:
+            Input.steel += addValue;
+            if(Input.steel < 0)
+                Input.steel = 0;
+            if(Input.steel > Compound.steel)
+                Input.steel = Compound.steel;
+            break;
+        case eCompound.fiber:
+            Input.fiber += addValue;
+            if(Input.fiber < 0)
+                Input.fiber = 0;
+            if(Input.fiber > Compound.fiber)
+                Input.fiber = Compound.fiber;
+            break;
+        case eCompound.fuel:
+            Input.fuel += addValue;
+            if(Input.fuel < 0)
+                Input.fuel = 0;
+            if(Input.fuel > Compound.fuel)
+                Input.fuel = Compound.fuel;
+            break;
+    }
+    UpdateInput(eType);
+}
+function UpdateInput(eType) {
+    var TEXT_Field;
+    switch(eType) {
+        case eCompound.steel:
+            TEXT_Field = document.getElementById(pInput.steel);
+            break;
+        case eCompound.fiber:
+            TEXT_Field = document.getElementById(pInput.fiber);
+            break;
+        case eCompound.fuel:
+            TEXT_Field = document.getElementById(pInput.fuel);
+            break;
+    }
+    TEXT_Field.innerHTML = this.GetInput(eType);
+}
+//#endregion
+
 // #region Compound : Steel
-function AddSteel(addSteel) {
-    Compound.steel += addSteel;
-    this.UpdateSteel();
-}
-function UpdateSteel() {
-    var TEXT_Steel = document.getElementById('compound_steel');
-    TEXT_Steel.innerHTML = Compound.steel;
-}
 function CompoundItem_Steel() {
     var metalCompNum = parseInt(Item.metal / 10);
     
     AddItem(eItem.metal, -metalCompNum * 10);
-    this.AddSteel(metalCompNum);
+    AddCompound(eCompound.steel, metalCompNum);
     
     if(Input.steel === 0)
         Input.steel = Compound.steel;
     
-    this.UpdateSteel_Input();
-}
-function UpdateSteel_Input() {
-    var TEXT_Steel = document.getElementById('input_steel');
-    TEXT_Steel.innerHTML = Input.steel;
-}
-function InputSteel_Add(addInput) {
-    Input.steel += addInput;
-    
-    if(Input.steel < 0)
-        Input.steel = 0;
-    if(Input.steel > Compound.steel)
-        Input.steel = Compound.steel;
-    
-    this.UpdateSteel_Input();
+    UpdateInput(eCompound.steel);
 }
 // #endregion
 
 // #region Compound : Fiber
-function AddFiber(addFiber) {
-    Compound.fiber += addFiber;
-    this.UpdateFiber();
-}
-function UpdateFiber() {
-    var TEXT_Fiber = document.getElementById('compound_fiber');
-    TEXT_Fiber.innerHTML = Compound.fiber;
-}
 function CompoundItem_Fiber() {
     var plasticCompNum = parseInt(Item.plastic / 10);
     var glassCompNum = parseInt(Item.glass / 10);
@@ -231,62 +313,26 @@ function CompoundItem_Fiber() {
     AddItem(eItem.glass, -min * 10);
     AddItem(eItem.rubber_tree, -min * 10);
     
-    this.AddFiber(min);
+    AddCompound(eCompound.fiber, min);
     
     if(Input.fiber === 0)
         Input.fiber = Compound.fiber;
     
-    this.UpdateFiber_Input();
-}
-function UpdateFiber_Input() {
-    var TEXT_Fiber = document.getElementById('input_fiber');
-    TEXT_Fiber.innerHTML = Input.fiber;
-}
-function InputFiber_Add(addInput) {
-    Input.fiber += addInput;
-    
-    if(Input.fiber < 0)
-        Input.fiber = 0;
-    if(Input.fiber > Compound.fiber)
-        Input.fiber = Compound.fiber;
-    
-    this.UpdateFiber_Input();
+    UpdateInput(eCompound.fiber);
 }
 // #endregion
 
 // #region Compound : Fuel
-function AddFuel(addFuel) {
-    Compound.fuel += addFuel;
-    this.UpdateFuel();
-}
-function UpdateFuel() {
-    var TEXT_Fuel = document.getElementById('compound_fuel');
-    TEXT_Fuel.innerHTML = Compound.fuel;
-}
 function CompoundItem_Fuel() {
     var treeCompNum = parseInt(Item.tree / 10);
     
     AddItem(eItem.tree, -treeCompNum * 10);
-    this.AddFuel(treeCompNum);
+    AddCompound(eCompound.fuel, treeCompNum);
     
     if(Input.fuel === 0)
         Input.fuel = Compound.fuel;
     
-    this.UpdateFuel_Input();
-}
-function UpdateFuel_Input() {
-    var TEXT_Fuel = document.getElementById('input_fuel');
-    TEXT_Fuel.innerHTML = Input.fuel;
-}
-function InputFuel_Add(addInput) {
-    Input.fuel += addInput;
-    
-    if(Input.fuel < 0)
-        Input.fuel = 0;
-    if(Input.fuel > Compound.fuel)
-        Input.fuel = Compound.fuel;
-    
-    this.UpdateFuel_Input();
+    UpdateInput(eCompound.fuel);
 }
 // #endregion
 
@@ -308,9 +354,9 @@ function BuildRocket() {
     
     this.UpdatePercent_Rocket();
     
-    this.AddSteel(-Input.steel);
-    this.AddFiber(-Input.fiber);
-    this.AddFuel(-Input.fuel);
+    AddCompound(eCompound.steel, -Input.steel);
+    AddCompound(eCompound.fiber, -Input.fiber);
+    AddCompound(eCompound.fuel, -Input.fuel);
     this.ResetInput();
 }
 function UpdatePercent_Rocket() {
