@@ -1,6 +1,13 @@
 body {
   background-color: skyblue;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#field_show {
+  display: flex;
   flex-direction: row;
 }
 
@@ -30,4 +37,12 @@ body {
   width: 200px;
   height: 200px;
   background-color: darkolivegreen;
+}
+
+#field_story {
+  text-align: left;
+  width: 780px;
+  height: 30px;
+  padding: 10px;
+  background-color: cornsilk;
 }
