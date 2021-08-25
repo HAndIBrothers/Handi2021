@@ -319,6 +319,9 @@ function CompoundItem_Steel() {
         Input.steel = Compound.steel;
     
     UpdateInput(eCompound.steel);
+
+    queue_log.enqueue("Metal x" + metalCompNum * 10 + " => Steel x" + metalCompNum);
+    UpdateText_Log();
 }
 // #endregion
 
@@ -339,6 +342,10 @@ function CompoundItem_Fiber() {
         Input.fiber = Compound.fiber;
     
     UpdateInput(eCompound.fiber);
+
+    queue_log.enqueue("Plastic x" + min * 10 + " / Glass x" + min * 10 + " / Rubber Tree x" + min * 10 
+    + " => Fiber x" + min);
+    UpdateText_Log();
 }
 // #endregion
 
@@ -353,6 +360,9 @@ function CompoundItem_Fuel() {
         Input.fuel = Compound.fuel;
     
     UpdateInput(eCompound.fuel);
+
+    queue_log.enqueue("Tree x" + treeCompNum * 10 + " => Fuel x" + treeCompNum);
+    UpdateText_Log();
 }
 // #endregion
 
@@ -378,6 +388,9 @@ function BuildRocket() {
     AddCompound(eCompound.fiber, -Input.fiber);
     AddCompound(eCompound.fuel, -Input.fuel);
     this.ResetInput();
+
+    queue_log.enqueue("Rocket Built(" + percent_rocket + "%)");
+    UpdateText_Log();
 }
 function UpdatePercent_Rocket() {
     var TEXT_Rocket = document.getElementById('percent_rocket');
@@ -401,6 +414,9 @@ function LaunchRocket() {
     
     this.ResetPercent_Rocket();
     this.UpdateText_LaunchRocket();
+
+    queue_log.enqueue("Rocket Launched : " + (this.result_rocket ? "발사 성공" : "발사 실패"));
+    UpdateText_Log();
 }
 function UpdateText_LaunchRocket() {
     var TEXT_Rocket = document.getElementById('result_rocket');
