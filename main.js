@@ -16,6 +16,7 @@ var Input = {
     fiber : 0,
     fuel : 0
 }
+var queue_log;
 function Open() {
     // :: Reset : Item
     ResetItem();
@@ -29,6 +30,9 @@ function Open() {
     // :: Reset : Percent
     this.percent_rocket = 0;
     
+    // :: Log
+    queue_log = new Queue();
+
     // :: UI
     this.UpdateUI();
 }
@@ -61,19 +65,35 @@ function ResetInput() {
 // #region Go
 function GoToMountain() {
     // :: Metal
-    AddItem(eItem.metal, this.GetRandom());
+    var metal = this.GetRandom();
+    AddItem(eItem.metal, metal);
+
     // :: Rubber_Tree
-    AddItem(eItem.rubber_tree, this.GetRandom());
+    var rubber_tree = this.GetRandom();
+    AddItem(eItem.rubber_tree, rubber_tree);
+
+    queue_log.enqueue("From Mountain : Metal : " + metal + " / Rubber_Tree : " + rubber_tree);
+    UpdateText_Log();
 }
 function GoToCity() {
     // :: Plastic
+    var plastic = this.GetRandom();
     AddItem(eItem.plastic, this.GetRandom());
+
+    queue_log.enqueue("From City : Plastic : " + plastic);
+    UpdateText_Log();
 }
 function GoToRiver() {
     // :: Glass
-    AddItem(eItem.glass, this.GetRandom());
+    var glass = this.GetRandom();
+    AddItem(eItem.glass, glass);
+
     // :: Tree
-    AddItem(eItem.tree, this.GetRandom());
+    var tree = this.GetRandom();
+    AddItem(eItem.tree, tree);
+
+    queue_log.enqueue("From River : Glass : " + glass + " / Tree : " + tree);
+    UpdateText_Log();
 }
 function GetRandom() {
     return Math.floor(Math.random() * 10) + 1;
@@ -388,3 +408,67 @@ function UpdateText_LaunchRocket() {
     = this.result_rocket ? "발사 성공" : "발사 실패";
 }
 // #endregion
+
+//#region Class
+class Queue {
+    constructor() {
+        this._arr = [];
+    }
+    copyFrom(arr) {
+        this._arr = arr;
+    }
+    enqueue(item) {
+        this._arr.push(item);
+        if(this.count() > 5) {
+            this.dequeue();
+        }
+    }
+    dequeue() {
+        return this._arr.shift();
+    }
+    count() {
+        return this._arr.length;
+    }
+}
+class Stack {
+    constructor() {
+      this._arr = [];
+    }
+    push(item) {
+      this._arr.push(item);
+    }
+    pop() {
+      return this._arr.pop();
+    }
+    peek() {
+      return this._arr[this._arr.length - 1];
+    }
+  }
+//#endregion
+
+//#region Log
+function UpdateText_Log() {
+    var TEXT_Field = document.getElementById('field_story');
+
+    var stringData = "";
+
+    // :: Copy
+    var copyQueue = new Queue();
+    copyQueue.copyFrom(queue_log._arr.slice());
+
+    // :: Change Stack
+    var tempStack = new Stack();
+    var count = copyQueue.count();
+    for(var index = 0; index < count; index++) {
+        tempStack.push(copyQueue.dequeue());
+    }
+
+    // :: String
+    for(var index = 0; index < count; index++) {
+        stringData += `<div>${tempStack.pop()}</div>`;
+    }
+
+    console.log(stringData);
+    TEXT_Field.innerHTML = stringData;
+}
+//#endregion
