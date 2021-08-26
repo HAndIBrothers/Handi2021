@@ -298,6 +298,7 @@ function AddInput(eType, addValue) {
     }
     
     UpdateText_Log();
+    UpdateInput(eType);
 }
 function UpdateInput(eType) {
     var TEXT_Field;
