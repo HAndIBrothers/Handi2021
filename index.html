@@ -5,54 +5,68 @@
         <link rel="stylesheet" href="main.css" />
     </head>
     <body onload="Open()">
+        <div id="field_item">
+            <span>Metal : x<em id="item_metal"></em>
+                &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+            <span>Plastic : x<em id="item_plastic"></em>
+                &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+            <span>Glass : x<em id="item_glass"></em>
+                &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+            <span>RubberTree : x<em id="item_rubber_tree"></em>
+                &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+            <span>Tree : x<em id="item_tree"></em></span>
+        </div>
+        <div id="field_display">
+            <button onclick="GoToRiver()">강가</button>
+            <button onclick="GoToMountain()">산</button>
+            <button onclick="GoToCity()">도시</button>
+            <div><em id="result_rocket"></em></div>
+        </div>
         <div id="field_show">
-            <div id="field_item">
-                <h3>Item</h3>
-                <div>Metal : <em id="item_metal"></em></div>
-                <div>Plastic : <em id="item_plastic"></em></div>
-                <div>Glass : <em id="item_glass"></em></div>
-                <div>RubberTree : <em id="item_rubber_tree"></em></div>
-                <div>Tree : <em id="item_tree"></em></div>
-                <button onclick="GoToRiver()">강가</button>
-                <button onclick="GoToMountain()">산</button>
-                <button onclick="GoToCity()">도시</button>
+            <div id="field_story">
+                dddd
             </div>
             
             <div id="field_compound">
                 <h3>Compound</h3>
-                <div>Steel : <em id="compound_steel"></em></div>
-                <div>Fiber : <em id="compound_fiber"></em></div>
-                <div>Fuel : <em id="compound_fuel"></em></div>
-                <button onclick="CompoundItem()">가공</button>
+                <button onclick="CompoundItem_Steel()" 
+                class="button_comp" id="button_comp_steel">강가</button>
+                <div>Steel : x<em id="compound_steel"></em></div>
+                <button onclick="CompoundItem_Fiber()" 
+                class="button_comp" id="button_comp_fiber">강가</button>
+                <div>Fiber : x<em id="compound_fiber"></em></div>
+                <button onclick="CompoundItem_Fuel()" 
+                class="button_comp" id="button_comp_fuel">강가</button>
+                <div>Fuel : x<em id="compound_fuel"></em></div>
+                <!-- <button onclick="CompoundItem()">가공</button> -->
             </div>
             
             <div id="field_input">
                 <h3>Rocket Input</h3>
-                <button onclick="AddInput(eCompound.steel, -1)">left</button>
-                <span>Steel : <em id="input_steel"></em></span>
-                <button onclick="AddInput(eCompound.steel, 1)"">right</button>
-                <br />
-                <button onclick="AddInput(eCompound.fiber, -1)">left</button>
-                <span>Fiber : <em id="input_fiber"></em></span>
-                <button onclick="AddInput(eCompound.fiber, 1)">right</button>
-                <br />
-                <button onclick="AddInput(eCompound.fuel, -1)">left</button>
-                <span>Fuel : <em id="input_fuel"></em></span>
-                <button onclick="AddInput(eCompound.fuel, 1)">right</button>
-                <br />
+                <div class="field_input_item">
+                    <button onclick="AddInput(eCompound.steel, -1)">left</button>
+                    <span>Steel : <em id="input_steel"></em></span>
+                    <button onclick="AddInput(eCompound.steel, 1)">right</button>
+                </div>
+                <div class="field_input_item">
+                    <button onclick="AddInput(eCompound.fiber, -1)">left</button>
+                    <span>Fiber : <em id="input_fiber"></em></span>
+                    <button onclick="AddInput(eCompound.fiber, 1)">right</button>
+                </div>
+                <div class="field_input_item">
+                    <button onclick="AddInput(eCompound.fuel, -1)">left</button>
+                    <span>Fuel : <em id="input_fuel"></em></span>
+                    <button onclick="AddInput(eCompound.fuel, 1)">right</button>
+                </div>
                 <button onclick="BuildRocket()">로켓 제작</button>
             </div>
             
             <div id="field_rocket">
                 <h3>Rocket</h3>
-                <span>Percent : <em id="percent_rocket"></em>%</span>
+                <div><em id="percent_rocket"></em>%</div>
+                <hr width="100%" />
                 <button onclick="LaunchRocket()">로켓 발사</button>
-                <div><em id="result_rocket"></em></div>
             </div>
-        </div>
-
-        <div id="field_story">
-            dddd
         </div>
     </body>
 </html>

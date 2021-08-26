@@ -35,6 +35,7 @@ function Open() {
 
     // :: UI
     this.UpdateUI();
+    UpdateText_Compound();
 }
 // #endregion
 
@@ -158,6 +159,7 @@ function AddItem(eType, addItem) {
             break;
     }
     this.UpdateItem(eType);
+    UpdateText_Compound();
 }
 function GetItem(eType) {
     switch(eType) {
@@ -207,6 +209,11 @@ const pCompound = {
     steel : "compound_steel",
     fiber : "compound_fiber",
     fuel : "compound_fuel"
+}
+const pCompoundButton = {
+    steel : "button_comp_steel",
+    fiber : "button_comp_fiber",
+    fuel : "button_comp_fuel"
 }
 function GetCompound(eType) {
     switch(eType) {
@@ -289,7 +296,8 @@ function AddInput(eType, addValue) {
                 Input.fuel = Compound.fuel;
             break;
     }
-    UpdateInput(eType);
+    
+    UpdateText_Log();
 }
 function UpdateInput(eType) {
     var TEXT_Field;
@@ -321,7 +329,19 @@ function CompoundItem_Steel() {
     UpdateInput(eCompound.steel);
 
     queue_log.enqueue("Metal x" + metalCompNum * 10 + " => Steel x" + metalCompNum);
+    
     UpdateText_Log();
+    UpdateText_Compound();
+}
+function UpdateText_CompoundSteel() {
+    var TEXT_Field = document.getElementById(pCompoundButton.steel);
+    TEXT_Field.innerHTML
+    = "Metal " + Item.metal + "/" + "10";
+
+    if(Item.metal >= 10)
+        TEXT_Field.style.backgroundColor = "#fd87db";
+    else
+        TEXT_Field.style.backgroundColor = "#ffffff";
 }
 // #endregion
 
@@ -345,7 +365,23 @@ function CompoundItem_Fiber() {
 
     queue_log.enqueue("Plastic x" + min * 10 + " / Glass x" + min * 10 + " / Rubber Tree x" + min * 10 
     + " => Fiber x" + min);
+    
     UpdateText_Log();
+    UpdateText_Compound();
+}
+function UpdateText_CompoundFiber() {
+    var TEXT_Field = document.getElementById(pCompoundButton.fiber);
+    TEXT_Field.innerHTML
+    = "Plastic " + Item.plastic + "/" + "10" + " | "
+    + "Glass " + Item.glass + "/" + "10" + " | "
+    + "Rubber Tree " + Item.rubber_tree + "/" + "10";
+
+    if(Item.plastic >= 10
+        && Item.glass >= 10
+        && Item.rubber_tree >= 10)
+        TEXT_Field.style.backgroundColor = "#fd87db";
+    else
+        TEXT_Field.style.backgroundColor = "#ffffff";
 }
 // #endregion
 
@@ -362,7 +398,19 @@ function CompoundItem_Fuel() {
     UpdateInput(eCompound.fuel);
 
     queue_log.enqueue("Tree x" + treeCompNum * 10 + " => Fuel x" + treeCompNum);
+    
     UpdateText_Log();
+    UpdateText_Compound();
+}
+function UpdateText_CompoundFuel() {
+    var TEXT_Field = document.getElementById(pCompoundButton.fuel);
+    TEXT_Field.innerHTML
+    = "Tree " + Item.tree + "/" + "10";
+
+    if(Item.tree >= 10)
+        TEXT_Field.style.backgroundColor = "#fd87db";
+    else
+        TEXT_Field.style.backgroundColor = "#ffffff";
 }
 // #endregion
 
@@ -371,6 +419,11 @@ function CompoundItem() {
     this.CompoundItem_Steel();
     this.CompoundItem_Fiber();
     this.CompoundItem_Fuel();
+}
+function UpdateText_Compound() {
+    UpdateText_CompoundSteel();
+    UpdateText_CompoundFiber();
+    UpdateText_CompoundFuel();
 }
 // #endregion
 
@@ -390,7 +443,9 @@ function BuildRocket() {
     this.ResetInput();
 
     queue_log.enqueue("Rocket Built(" + percent_rocket + "%)");
+    
     UpdateText_Log();
+    UpdateText_Compound();
 }
 function UpdatePercent_Rocket() {
     var TEXT_Rocket = document.getElementById('percent_rocket');
@@ -481,7 +536,7 @@ function UpdateText_Log() {
 
     // :: String
     for(var index = 0; index < count; index++) {
-        stringData += `<div>${tempStack.pop()}</div>`;
+        stringData += `<div class="text_log">${tempStack.pop()}</div>`;
     }
 
     console.log(stringData);
