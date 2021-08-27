@@ -24,6 +24,11 @@ function Open() {
     // :: Reset : Compound
     ResetCompound();
     
+    // :: Reset : Area
+    ResetSec(eArea.river);
+    ResetSec(eArea.mountain);
+    ResetSec(eArea.city);
+
     // :: Reset : Input
     ResetInput();
     
@@ -64,40 +69,112 @@ function ResetInput() {
 // #endregion
 
 // #region Go
+const eArea = {
+    river : 1,
+    mountain : 2,
+    city : 3
+}
+const pAreaSec = {
+    river : "field_sec_river",
+    mountain : "field_sec_mountain",
+    city : "field_sec_city"
+}
 function GoToMountain() {
     // :: Metal
-    var metal = this.GetRandom();
-    AddItem(eItem.metal, metal);
+    var BUTTON_Field = document.getElementById("button_mountain");
+    BUTTON_Field.disabled = true;
+    this.WaitAndDo(eArea.mountain, () => {
+        var metal = this.GetRandom();
+        AddItem(eItem.metal, metal);
+    
+        // :: Rubber_Tree
+        var rubber_tree = this.GetRandom();
+        AddItem(eItem.rubber_tree, rubber_tree);
+    
+        queue_log.enqueue("From Mountain : Metal : " + metal + " / Rubber_Tree : " + rubber_tree);
+        UpdateText_Log();
 
-    // :: Rubber_Tree
-    var rubber_tree = this.GetRandom();
-    AddItem(eItem.rubber_tree, rubber_tree);
-
-    queue_log.enqueue("From Mountain : Metal : " + metal + " / Rubber_Tree : " + rubber_tree);
-    UpdateText_Log();
+        BUTTON_Field.disabled = false;
+    });
 }
 function GoToCity() {
     // :: Plastic
-    var plastic = this.GetRandom();
-    AddItem(eItem.plastic, this.GetRandom());
+    var BUTTON_Field = document.getElementById("button_city");
+    BUTTON_Field.disabled = true;
+    this.WaitAndDo(eArea.city, () => {
+        var plastic = this.GetRandom();
+        AddItem(eItem.plastic, this.GetRandom());
+    
+        queue_log.enqueue("From City : Plastic : " + plastic);
+        UpdateText_Log();
 
-    queue_log.enqueue("From City : Plastic : " + plastic);
-    UpdateText_Log();
+        BUTTON_Field.disabled = false;
+    });
 }
 function GoToRiver() {
     // :: Glass
-    var glass = this.GetRandom();
-    AddItem(eItem.glass, glass);
+    var BUTTON_Field = document.getElementById("button_river");
+    BUTTON_Field.disabled = true;
+    this.WaitAndDo(eArea.river, () => {
+        var glass = this.GetRandom();
+        AddItem(eItem.glass, glass);
+    
+        // :: Tree
+        var tree = this.GetRandom();
+        AddItem(eItem.tree, tree);
+    
+        queue_log.enqueue("From River : Glass : " + glass + " / Tree : " + tree);
+        UpdateText_Log();
 
-    // :: Tree
-    var tree = this.GetRandom();
-    AddItem(eItem.tree, tree);
-
-    queue_log.enqueue("From River : Glass : " + glass + " / Tree : " + tree);
-    UpdateText_Log();
+        BUTTON_Field.disabled = false;
+    });
 }
 function GetRandom() {
     return Math.floor(Math.random() * 10) + 1;
+}
+function WaitAndDo(rArea, Do) {
+    // 2초 간격으로 메시지를 보여줌
+    var index = 0;
+    var count = GetSec(rArea);
+    SetSec(rArea, count, index);
+    let timerId = setInterval(() => {
+        index += 1;
+        SetSec(rArea, count, index);
+        if(index >= count) {
+            clearInterval(timerId);
+            Do();
+            ResetSec(rArea);
+        }
+    }, 1000);
+}
+function GetSec(rArea) {
+    switch(rArea) {
+        case eArea.river:
+            return 3;
+        case eArea.mountain:
+            return 4;
+        case eArea.city:
+            return 5;
+    }
+}
+function ResetSec(rArea) {
+    SetSec(rArea, GetSec(rArea), 0);
+}
+function SetSec(rArea, count, index) {
+    switch(rArea) {
+        case eArea.river:
+            document.getElementById(pAreaSec.river).innerHTML
+            = (count - index) + " sec";
+            break;
+        case eArea.mountain:
+            document.getElementById(pAreaSec.mountain).innerHTML
+            = (count - index) + " sec";
+            break;
+        case eArea.city:
+            document.getElementById(pAreaSec.city).innerHTML
+            = (count - index) + " sec";
+            break;
+    }
 }
 // #endregion
 

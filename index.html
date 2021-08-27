@@ -17,10 +17,44 @@
             <span>Tree : x<em id="item_tree"></em></span>
         </div>
         <div id="field_display">
-            <button onclick="GoToRiver()">강가</button>
-            <button onclick="GoToMountain()">산</button>
-            <button onclick="GoToCity()">도시</button>
-            <div><em id="result_rocket"></em></div>
+            <div id="field_display_left">
+                <button id="button_river" onclick="GoToRiver()">
+                    <div class="field_display_button_left">강</div>
+                    <div class="field_display_button_right">
+                        <div class="field_display_button_right_up">
+                            <div id="field_sec_river" class="field_display_button_right_up_left">2Sec</div>
+                            <div class="field_display_button_right_up_right">1-10 ea</div>
+                        </div>
+                        <div class="field_display_button_right_down">Start Collecting</div>
+                    </div>
+                </button>
+                <button id="button_mountain" onclick="GoToMountain()">
+                    <div class="field_display_button_left">산</div>
+                    <div class="field_display_button_right">
+                        <div class="field_display_button_right_up">
+                            <div id="field_sec_mountain" class="field_display_button_right_up_left">2Sec</div>
+                            <div class="field_display_button_right_up_right">1-10 ea</div>
+                        </div>
+                        <div class="field_display_button_right_down">Start Collecting</div>
+                    </div>
+                </button>
+                <button id="button_city" onclick="GoToCity()">
+                    <div class="field_display_button_left">도시</div>
+                    <div class="field_display_button_right">
+                        <div class="field_display_button_right_up">
+                            <div id="field_sec_city" class="field_display_button_right_up_left">2Sec</div>
+                            <div class="field_display_button_right_up_right">1-10 ea</div>
+                        </div>
+                        <div class="field_display_button_right_down">Start Collecting</div>
+                    </div>
+                </button>
+            </div>
+            <div id="field_display_center">
+                <div><em id="result_rocket"></em></div>
+            </div>
+            <div id="field_display_right">
+                
+            </div>
         </div>
         <div id="field_show">
             <div id="field_story">

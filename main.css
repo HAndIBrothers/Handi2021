@@ -97,3 +97,82 @@ body {
 #field_input > button {
   height: 50px;
 }
+
+#field_display {
+  display: flex;
+  flex-direction: row;
+}
+
+#field_display_left {
+  display: flex;
+  flex-direction: column;
+  background-color: red;
+  width: 300px;
+}
+#field_display_left > button {
+  display: flex;
+  flex-direction: row;
+  width: 280px;
+  margin: 0 auto;
+  margin-top: 10px;
+  height: 100px;
+}
+.field_display_button_left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  background-color: cadetblue;
+  height: 95px;
+}
+.field_display_button_right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  width: 200px;
+  background-color: cadetblue;
+  height: 95px;
+}
+.field_display_button_right_up {
+  display: flex;
+  flex-direction: row;
+}
+.field_display_button_right_up_left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 30px;
+  background-color: chartreuse;
+}
+.field_display_button_right_up_right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 30px;
+  margin-left: 10px;
+  background-color: chartreuse;
+}
+
+.field_display_button_right_down {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 160px;
+  height: 30px;
+  margin-top: 10px;
+  background-color: chartreuse;
+}
+
+#field_display_center {
+  background-color: yellow;
+  width: 468px;
+}
+
+#field_display_right {
+  background-color: blue;
+  width: 256px;
+}
