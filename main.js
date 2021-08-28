@@ -419,7 +419,7 @@ function UpdateText_CompoundSteel() {
     if(Item.metal >= 10)
         TEXT_Field.style.backgroundColor = "#fd87db";
     else
-        TEXT_Field.style.backgroundColor = "#ffffff";
+        TEXT_Field.style.backgroundColor = "#000000";
 }
 // #endregion
 
@@ -459,7 +459,7 @@ function UpdateText_CompoundFiber() {
         && Item.rubber_tree >= 10)
         TEXT_Field.style.backgroundColor = "#fd87db";
     else
-        TEXT_Field.style.backgroundColor = "#ffffff";
+        TEXT_Field.style.backgroundColor = "#000000";
 }
 // #endregion
 
@@ -488,7 +488,7 @@ function UpdateText_CompoundFuel() {
     if(Item.tree >= 10)
         TEXT_Field.style.backgroundColor = "#fd87db";
     else
-        TEXT_Field.style.backgroundColor = "#ffffff";
+        TEXT_Field.style.backgroundColor = "#000000";
 }
 // #endregion
 

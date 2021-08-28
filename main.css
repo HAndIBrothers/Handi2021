@@ -1,10 +1,24 @@
+.dash {
+  background-color: black;
+  border: 1px dashed white;
+}
+
 body {
-  background-color: skyblue;
+  background-color: black;
+  color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-family: 'Source Sans Pro', sans-serif;
+}
+
+button{
+  background-color: black;
+  color: white;
+}
+button:hover {
+  background-color: gray;
 }
 
 #field_show {
@@ -17,14 +31,12 @@ body {
   width: 1024px;
   height: 30px;
   padding-top: 10px;
-  background-color: brown;
 }
 
 #field_display {
   text-align: center;
   width: 1024px;
   height: 400px;
-  background-color: khaki;
 }
 
 #field_compound {
@@ -33,7 +45,6 @@ body {
   text-align: center;
   width: 206px;
   height: 200px;
-  background-color: cadetblue;
 }
 
 #field_input {
@@ -42,7 +53,6 @@ body {
   text-align: center;
   width: 206px;
   height: 200px;
-  background-color: darkkhaki;
 }
 
 #field_rocket {
@@ -51,7 +61,6 @@ body {
   text-align: center;
   width: 256px;
   height: 200px;
-  background-color: darkolivegreen;
 }
 #field_rocket > div {
   height: 50px;
@@ -68,13 +77,12 @@ body {
   text-align: left;
   width: 356px;
   height: 200px;
-  background-color: cornsilk;
 }
 
 .text_log {
+  border: 1px dashed white;
   margin: 5px;
   height: 30px;
-  background-color: skyblue;
 }
 
 .button_comp {
@@ -86,7 +94,6 @@ body {
 .field_input_item {
   display: flex;
   flex-direction: row;
-  background-color: rebeccapurple;
 }
 
 .field_input_item > button, span{
@@ -106,7 +113,6 @@ body {
 #field_display_left {
   display: flex;
   flex-direction: column;
-  background-color: red;
   width: 300px;
 }
 #field_display_left > button {
@@ -122,7 +128,6 @@ body {
   justify-content: center;
   align-items: center;
   width: 50px;
-  background-color: cadetblue;
   height: 95px;
 }
 .field_display_button_right {
@@ -132,7 +137,6 @@ body {
   align-items: center;
   margin-left: 10px;
   width: 200px;
-  background-color: cadetblue;
   height: 95px;
 }
 .field_display_button_right_up {
@@ -145,7 +149,6 @@ body {
   align-items: center;
   width: 50px;
   height: 30px;
-  background-color: chartreuse;
 }
 .field_display_button_right_up_right {
   display: flex;
@@ -154,7 +157,6 @@ body {
   width: 100px;
   height: 30px;
   margin-left: 10px;
-  background-color: chartreuse;
 }
 
 .field_display_button_right_down {
@@ -164,15 +166,12 @@ body {
   width: 160px;
   height: 30px;
   margin-top: 10px;
-  background-color: chartreuse;
 }
 
 #field_display_center {
-  background-color: yellow;
   width: 468px;
 }
 
 #field_display_right {
-  background-color: blue;
   width: 256px;
 }
