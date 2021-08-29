@@ -83,6 +83,7 @@ function GoToMountain() {
     // :: Metal
     var BUTTON_Field = document.getElementById("button_mountain");
     BUTTON_Field.disabled = true;
+    BUTTON_Field.style.backgroundColor = "#cccc00";
     this.WaitAndDo(eArea.mountain, () => {
         var metal = this.GetRandom();
         AddItem(eItem.metal, metal);
@@ -94,6 +95,7 @@ function GoToMountain() {
         queue_log.enqueue("From Mountain : Metal : " + metal + " / Rubber_Tree : " + rubber_tree);
         UpdateText_Log();
 
+        BUTTON_Field.style.backgroundColor = "#000000";
         BUTTON_Field.disabled = false;
     });
 }

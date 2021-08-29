@@ -169,8 +169,7 @@ button:hover {
 }
 
 #field_display_center {
-  display: flex;
-  flex-wrap: wrap;
+  font-size: 30px;
   width: 468px;
 }
 
