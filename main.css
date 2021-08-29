@@ -169,7 +169,7 @@ button:hover {
 }
 
 #field_display_center {
-  font-size: 1vh;
+  font-family: "Courier New", Courier, monospace;
   width: 468px;
 }
 
