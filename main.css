@@ -169,6 +169,8 @@ button:hover {
 }
 
 #field_display_center {
+  display: flex;
+  flex-wrap: wrap;
   width: 468px;
 }
 
