@@ -8,42 +8,42 @@
         <div id="field_item" class="dash">
             <span>[ Metal : x<em id="item_metal"></em> ]
                 &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
-            <span>[ Plastic : x<em id="item_plastic"></em> ]
-                &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
             <span>[ Glass : x<em id="item_glass"></em> ]
                 &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
-            <span>[ RubberTree : x<em id="item_rubber_tree"></em> ]
+            <span>[ Plastic : x<em id="item_plastic"></em> ]
                 &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
-            <span>[ Tree : x<em id="item_tree"></em> ]</span>
+            <span>[ Rubber : x<em id="item_rubber_tree"></em> ]
+                &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+            <span>[ Carrot : x<em id="item_tree"></em> ]</span>
         </div>
         <div id="field_display">
             <div id="field_display_left" class="dash">
-                <button id="button_river" class="dash" onclick="GoToRiver()">
-                    <div class="field_display_button_left">강</div>
-                    <div class="field_display_button_right">
-                        <div class="field_display_button_right_up dash">
-                            <div id="field_sec_river" class="field_display_button_right_up_left">2Sec</div>
-                            <div class="field_display_button_right_up_right">1-10 ea</div>
-                        </div>
-                        <div class="field_display_button_right_down">Start Collecting</div>
-                    </div>
-                </button>
-                <button id="button_mountain" class="dash" onclick="GoToMountain()">
-                    <div class="field_display_button_left">산</div>
-                    <div class="field_display_button_right">
-                        <div class="field_display_button_right_up dash">
-                            <div id="field_sec_mountain" class="field_display_button_right_up_left">2Sec</div>
-                            <div class="field_display_button_right_up_right">1-10 ea</div>
-                        </div>
-                        <div class="field_display_button_right_down">Start Collecting</div>
-                    </div>
-                </button>
                 <button id="button_city" class="dash" onclick="GoToCity()">
-                    <div class="field_display_button_left">도시</div>
+                    <div class="field_display_button_left">City</div>
                     <div class="field_display_button_right">
                         <div class="field_display_button_right_up dash">
                             <div id="field_sec_city" class="field_display_button_right_up_left">2Sec</div>
-                            <div class="field_display_button_right_up_right">1-10 ea</div>
+                            <div class="field_display_button_right_up_right">1-3 ea</div>
+                        </div>
+                        <div class="field_display_button_right_down">Start Collecting</div>
+                    </div>
+                </button>
+                <button id="button_river" class="dash" onclick="GoToField()">
+                    <div class="field_display_button_left">Carrot Fields</div>
+                    <div class="field_display_button_right">
+                        <div class="field_display_button_right_up dash">
+                            <div id="field_sec_river" class="field_display_button_right_up_left">2Sec</div>
+                            <div class="field_display_button_right_up_right">1-3 ea</div>
+                        </div>
+                        <div class="field_display_button_right_down">Start Collecting</div>
+                    </div>
+                </button>
+                <button id="button_mountain" class="dash" onclick="GoToPlantation()">
+                    <div class="field_display_button_left">Rubber Plantation</div>
+                    <div class="field_display_button_right">
+                        <div class="field_display_button_right_up dash">
+                            <div id="field_sec_mountain" class="field_display_button_right_up_left">2Sec</div>
+                            <div class="field_display_button_right_up_right">1-3 ea</div>
                         </div>
                         <div class="field_display_button_right_down">Start Collecting</div>
                     </div>

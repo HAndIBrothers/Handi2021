@@ -3,8 +3,8 @@ var Item = {
     metal : 0,
     plastic : 0,
     glass : 0,
-    rubber_tree : 0,
-    tree : 0
+    rubber : 0,
+    carrot : 0
 }
 var Compound = {
     steel : 0,
@@ -49,8 +49,8 @@ function ResetItem() {
     Item.metal = 0;
     Item.plastic = 0;
     Item.glass = 0;
-    Item.rubber_tree = 0;
-    Item.tree = 0;
+    Item.rubber = 0;
+    Item.carrot = 0;
 
     UpdateUI();
 }
@@ -79,20 +79,17 @@ const pAreaSec = {
     mountain : "field_sec_mountain",
     city : "field_sec_city"
 }
-function GoToMountain() {
+function GoToPlantation() {
     // :: Metal
     var BUTTON_Field = document.getElementById("button_mountain");
     BUTTON_Field.disabled = true;
     BUTTON_Field.style.backgroundColor = "#cccc00";
-    this.WaitAndDo(eArea.mountain, () => {
-        var metal = this.GetRandom();
-        AddItem(eItem.metal, metal);
+    this.WaitAndDo(eArea.mountain, () => {    
+        // :: Rubber
+        var rubber = this.GetRandom(1, 3);
+        AddItem(eItem.rubber, rubber);
     
-        // :: Rubber_Tree
-        var rubber_tree = this.GetRandom();
-        AddItem(eItem.rubber_tree, rubber_tree);
-    
-        queue_log.enqueue("From Mountain : Metal : " + metal + " / Rubber_Tree : " + rubber_tree);
+        queue_log.enqueue("From Plantation : Rubber : " + rubber);
         UpdateText_Log();
 
         BUTTON_Field.style.backgroundColor = "#000000";
@@ -104,35 +101,40 @@ function GoToCity() {
     var BUTTON_Field = document.getElementById("button_city");
     BUTTON_Field.disabled = true;
     this.WaitAndDo(eArea.city, () => {
-        var plastic = this.GetRandom();
-        AddItem(eItem.plastic, this.GetRandom());
+        var metal = this.GetRandom(1, 3);
+        AddItem(eItem.metal, metal);
+        
+        var glass = this.GetRandom(1, 3);
+        AddItem(eItem.glass, glass);
+
+        var plastic = this.GetRandom(1, 3);
+        AddItem(eItem.plastic, plastic);
     
-        queue_log.enqueue("From City : Plastic : " + plastic);
+        queue_log.enqueue("From City : Metal : " + metal 
+        + " / Glass : " + glass + " / Plastic : " + plastic);
         UpdateText_Log();
 
         BUTTON_Field.disabled = false;
     });
 }
-function GoToRiver() {
+function GoToField() {
     // :: Glass
     var BUTTON_Field = document.getElementById("button_river");
     BUTTON_Field.disabled = true;
     this.WaitAndDo(eArea.river, () => {
-        var glass = this.GetRandom();
-        AddItem(eItem.glass, glass);
     
-        // :: Tree
-        var tree = this.GetRandom();
-        AddItem(eItem.tree, tree);
+        // :: Carrot
+        var carrot = this.GetRandom(1, 3);
+        AddItem(eItem.carrot, carrot);
     
-        queue_log.enqueue("From River : Glass : " + glass + " / Tree : " + tree);
+        queue_log.enqueue("From Field : Carrot : " + carrot);
         UpdateText_Log();
 
         BUTTON_Field.disabled = false;
     });
 }
-function GetRandom() {
-    return Math.floor(Math.random() * 10) + 1;
+function GetRandom(min, max) {
+    return Math.floor((Math.random() * (max - min + 1)) + min);
 }
 function WaitAndDo(rArea, Do) {
     // 2초 간격으로 메시지를 보여줌
@@ -154,9 +156,9 @@ function GetSec(rArea) {
         case eArea.river:
             return 3;
         case eArea.mountain:
-            return 4;
+            return 3;
         case eArea.city:
-            return 5;
+            return 3;
     }
 }
 function ResetSec(rArea) {
@@ -186,8 +188,8 @@ function UpdateUI() {
     this.UpdateItem(eItem.metal);
     this.UpdateItem(eItem.plastic);
     this.UpdateItem(eItem.glass);
-    this.UpdateItem(eItem.rubber_tree);
-    this.UpdateItem(eItem.tree);
+    this.UpdateItem(eItem.rubber);
+    this.UpdateItem(eItem.carrot);
     
     // :: Compound
     UpdateCompound(eCompound.steel);
@@ -209,15 +211,15 @@ const eItem = {
     metal : 1,
     plastic : 2,
     glass : 3,
-    rubber_tree : 4,
-    tree : 5
+    rubber : 4,
+    carrot : 5
 }
 const pItem = {
     metal : "item_metal",
     plastic : "item_plastic",
     glass : "item_glass",
-    rubber_tree : "item_rubber_tree",
-    tree : "item_tree"
+    rubber : "item_rubber_tree",
+    carrot : "item_tree"
 }
 function AddItem(eType, addItem) {
     switch(eType) {
@@ -230,11 +232,11 @@ function AddItem(eType, addItem) {
         case eItem.glass:
             Item.glass += addItem;
             break;
-        case eItem.rubber_tree:
-            Item.rubber_tree += addItem;
+        case eItem.rubber:
+            Item.rubber += addItem;
             break;
-        case eItem.tree:
-            Item.tree += addItem;
+        case eItem.carrot:
+            Item.carrot += addItem;
             break;
     }
     this.UpdateItem(eType);
@@ -248,10 +250,10 @@ function GetItem(eType) {
             return Item.plastic;
         case eItem.glass:
             return Item.glass;
-        case eItem.rubber_tree:
-            return Item.rubber_tree;
-        case eItem.tree:
-            return Item.tree;
+        case eItem.rubber:
+            return Item.rubber;
+        case eItem.carrot:
+            return Item.carrot;
     }
 }
 function UpdateItem(eType) {
@@ -266,11 +268,11 @@ function UpdateItem(eType) {
         case eItem.glass:
             TEXT_Field = document.getElementById(pItem.glass);
             break;
-        case eItem.rubber_tree:
-            TEXT_Field = document.getElementById(pItem.rubber_tree);
+        case eItem.rubber:
+            TEXT_Field = document.getElementById(pItem.rubber);
             break;
-        case eItem.tree:
-            TEXT_Field = document.getElementById(pItem.tree);
+        case eItem.carrot:
+            TEXT_Field = document.getElementById(pItem.carrot);
             break;
     }
     TEXT_Field.innerHTML = this.GetItem(eType);
@@ -429,12 +431,12 @@ function UpdateText_CompoundSteel() {
 function CompoundItem_Fiber() {
     var plasticCompNum = parseInt(Item.plastic / 10);
     var glassCompNum = parseInt(Item.glass / 10);
-    var rubberTreeCompNum = parseInt(Item.rubber_tree / 10);
+    var rubberTreeCompNum = parseInt(Item.rubber / 10);
     
     var min = Math.min(plasticCompNum, glassCompNum, rubberTreeCompNum);
     AddItem(eItem.plastic, -min * 10);
     AddItem(eItem.glass, -min * 10);
-    AddItem(eItem.rubber_tree, -min * 10);
+    AddItem(eItem.rubber, -min * 10);
     
     AddCompound(eCompound.fiber, min);
     
@@ -454,11 +456,11 @@ function UpdateText_CompoundFiber() {
     TEXT_Field.innerHTML
     = "Plastic " + Item.plastic + "/" + "10" + " | "
     + "Glass " + Item.glass + "/" + "10" + " | "
-    + "Rubber Tree " + Item.rubber_tree + "/" + "10";
+    + "Rubber Tree " + Item.rubber + "/" + "10";
 
     if(Item.plastic >= 10
         && Item.glass >= 10
-        && Item.rubber_tree >= 10)
+        && Item.rubber >= 10)
         TEXT_Field.style.backgroundColor = "#fd87db";
     else
         TEXT_Field.style.backgroundColor = "#000000";
@@ -467,9 +469,9 @@ function UpdateText_CompoundFiber() {
 
 // #region Compound : Fuel
 function CompoundItem_Fuel() {
-    var treeCompNum = parseInt(Item.tree / 10);
+    var treeCompNum = parseInt(Item.carrot / 10);
     
-    AddItem(eItem.tree, -treeCompNum * 10);
+    AddItem(eItem.carrot, -treeCompNum * 10);
     AddCompound(eCompound.fuel, treeCompNum);
     
     if(Input.fuel === 0)
@@ -477,7 +479,7 @@ function CompoundItem_Fuel() {
     
     UpdateInput(eCompound.fuel);
 
-    queue_log.enqueue("Tree x" + treeCompNum * 10 + " => Fuel x" + treeCompNum);
+    queue_log.enqueue("Carrot x" + treeCompNum * 10 + " => Fuel x" + treeCompNum);
     
     UpdateText_Log();
     UpdateText_Compound();
@@ -485,9 +487,9 @@ function CompoundItem_Fuel() {
 function UpdateText_CompoundFuel() {
     var TEXT_Field = document.getElementById(pCompoundButton.fuel);
     TEXT_Field.innerHTML
-    = "Tree " + Item.tree + "/" + "10";
+    = "Carrot " + Item.carrot + "/" + "10";
 
-    if(Item.tree >= 10)
+    if(Item.carrot >= 10)
         TEXT_Field.style.backgroundColor = "#fd87db";
     else
         TEXT_Field.style.backgroundColor = "#000000";

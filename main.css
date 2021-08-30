@@ -10,10 +10,10 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
 }
 
-button{
+button {
   background-color: black;
   color: white;
 }
@@ -96,7 +96,8 @@ button:hover {
   flex-direction: row;
 }
 
-.field_input_item > button, span{
+.field_input_item > button,
+span {
   width: 70px;
   height: 30px;
 }
