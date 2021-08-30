@@ -400,17 +400,22 @@ function UpdateInput(eType) {
 
 // #region Compound : Steel
 function CompoundItem_Steel() {
-    var metalCompNum = parseInt(Item.metal / 10);
+    var metalCompNum = parseInt(Item.metal / 15);
+    var plasticCompNum = parseInt(Item.plastic / 20);
+
+    var min = Math.min(metalCompNum, plasticCompNum);
     
-    AddItem(eItem.metal, -metalCompNum * 10);
-    AddCompound(eCompound.steel, metalCompNum);
+    AddItem(eItem.metal, -min * 15);
+    AddItem(eItem.plastic, -min * 20)
+    AddCompound(eCompound.steel, min);
     
     if(Input.steel === 0)
         Input.steel = Compound.steel;
     
     UpdateInput(eCompound.steel);
 
-    queue_log.enqueue("Metal x" + metalCompNum * 10 + " => Steel x" + metalCompNum);
+    queue_log.enqueue("Metal x" + metalCompNum * 15
+    + " / Plastic x" + plasticCompNum + " => Steel x" + metalCompNum);
     
     UpdateText_Log();
     UpdateText_Compound();
@@ -418,9 +423,9 @@ function CompoundItem_Steel() {
 function UpdateText_CompoundSteel() {
     var TEXT_Field = document.getElementById(pCompoundButton.steel);
     TEXT_Field.innerHTML
-    = "Metal " + Item.metal + "/" + "10";
+    = "Metal " + Item.metal + "/15" + " : Plastic " + Item.plastic + "/20";
 
-    if(Item.metal >= 10)
+    if(Item.metal >= 15 && Item.plastic >= 20)
         TEXT_Field.style.backgroundColor = "#fd87db";
     else
         TEXT_Field.style.backgroundColor = "#000000";
@@ -429,14 +434,14 @@ function UpdateText_CompoundSteel() {
 
 // #region Compound : Fiber
 function CompoundItem_Fiber() {
-    var plasticCompNum = parseInt(Item.plastic / 10);
-    var glassCompNum = parseInt(Item.glass / 10);
+    var glassCompNum = parseInt(Item.glass / 5);
     var rubberTreeCompNum = parseInt(Item.rubber / 10);
+    var metalCompNum = parseInt(Item.metal / 5);
     
-    var min = Math.min(plasticCompNum, glassCompNum, rubberTreeCompNum);
-    AddItem(eItem.plastic, -min * 10);
-    AddItem(eItem.glass, -min * 10);
+    var min = Math.min(metalCompNum, glassCompNum, rubberTreeCompNum);
+    AddItem(eItem.glass, -min * 5);
     AddItem(eItem.rubber, -min * 10);
+    AddItem(eItem.metal, -min * 5);
     
     AddCompound(eCompound.fiber, min);
     
@@ -445,7 +450,8 @@ function CompoundItem_Fiber() {
     
     UpdateInput(eCompound.fiber);
 
-    queue_log.enqueue("Plastic x" + min * 10 + " / Glass x" + min * 10 + " / Rubber Tree x" + min * 10 
+    queue_log.enqueue("Glass x" + min * 5 + " / Rubber Tree x" + min * 10 
+    + " / Metal x" + min * 5
     + " => Fiber x" + min);
     
     UpdateText_Log();
@@ -454,13 +460,13 @@ function CompoundItem_Fiber() {
 function UpdateText_CompoundFiber() {
     var TEXT_Field = document.getElementById(pCompoundButton.fiber);
     TEXT_Field.innerHTML
-    = "Plastic " + Item.plastic + "/" + "10" + " | "
-    + "Glass " + Item.glass + "/" + "10" + " | "
-    + "Rubber Tree " + Item.rubber + "/" + "10";
+    = "Glass " + Item.glass + "/5 | "
+    + "Rubber Tree " + Item.rubber + "/10 | "
+    + "Metal " + Item.metal + "/5";
 
-    if(Item.plastic >= 10
-        && Item.glass >= 10
-        && Item.rubber >= 10)
+    if(Item.glass >= 5
+        && Item.rubber >= 10
+        && Item.metal >= 5)
         TEXT_Field.style.backgroundColor = "#fd87db";
     else
         TEXT_Field.style.backgroundColor = "#000000";
