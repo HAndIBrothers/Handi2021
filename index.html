@@ -1,116 +1,183 @@
 ﻿<!DOCTYPE html>
 <html>
-    <head>
-        <script type ="text/javascript" src="main.js"></script>
-        <link rel="stylesheet" href="main.css" />
-    </head>
-    <body onload="Open()">
-        <div id="field_item" class="dash">
-            <span>[ Metal : x<em id="item_metal"></em> ]
-                &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
-            <span>[ Plastic : x<em id="item_plastic"></em> ]
-                &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
-            <span>[ Glass : x<em id="item_glass"></em> ]
-                &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
-            <span>[ RubberTree : x<em id="item_rubber_tree"></em> ]
-                &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
-            <span>[ Tree : x<em id="item_tree"></em> ]</span>
+  <head>
+    <script type="text/javascript" src="main.js"></script>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body onload="Open()">
+    <div id="field_item" class="dash">
+      <span
+        >[ Metal : x<em id="item_metal"></em> ]
+        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span
+      >
+      <span
+        >[ Plastic : x<em id="item_plastic"></em> ]
+        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span
+      >
+      <span
+        >[ Glass : x<em id="item_glass"></em> ]
+        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span
+      >
+      <span
+        >[ RubberTree : x<em id="item_rubber_tree"></em> ]
+        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span
+      >
+      <span>[ Tree : x<em id="item_tree"></em> ]</span>
+    </div>
+    <div id="field_display">
+      <div id="field_display_left" class="dash">
+        <button id="button_river" class="dash" onclick="GoToRiver()">
+          <div class="field_display_button_left">강</div>
+          <div class="field_display_button_right">
+            <div class="field_display_button_right_up dash">
+              <div
+                id="field_sec_river"
+                class="field_display_button_right_up_left"
+              >
+                2Sec
+              </div>
+              <div class="field_display_button_right_up_right">1-10 ea</div>
+            </div>
+            <div class="field_display_button_right_down">Start Collecting</div>
+          </div>
+        </button>
+        <button id="button_mountain" class="dash" onclick="GoToMountain()">
+          <div class="field_display_button_left">산</div>
+          <div class="field_display_button_right">
+            <div class="field_display_button_right_up dash">
+              <div
+                id="field_sec_mountain"
+                class="field_display_button_right_up_left"
+              >
+                2Sec
+              </div>
+              <div class="field_display_button_right_up_right">1-10 ea</div>
+            </div>
+            <div class="field_display_button_right_down">Start Collecting</div>
+          </div>
+        </button>
+        <button id="button_city" class="dash" onclick="GoToCity()">
+          <div class="field_display_button_left">도시</div>
+          <div class="field_display_button_right">
+            <div class="field_display_button_right_up dash">
+              <div
+                id="field_sec_city"
+                class="field_display_button_right_up_left"
+              >
+                2Sec
+              </div>
+              <div class="field_display_button_right_up_right">1-10 ea</div>
+            </div>
+            <div class="field_display_button_right_down">Start Collecting</div>
+          </div>
+        </button>
+      </div>
+
+      <div id="field_display_center" class="dash">
+        <div class="field_image_top">
+          <div id="moon"></div>
         </div>
-        <div id="field_display">
-            <div id="field_display_left" class="dash">
-                <button id="button_river" class="dash" onclick="GoToRiver()">
-                    <div class="field_display_button_left">강</div>
-                    <div class="field_display_button_right">
-                        <div class="field_display_button_right_up dash">
-                            <div id="field_sec_river" class="field_display_button_right_up_left">2Sec</div>
-                            <div class="field_display_button_right_up_right">1-10 ea</div>
-                        </div>
-                        <div class="field_display_button_right_down">Start Collecting</div>
-                    </div>
-                </button>
-                <button id="button_mountain" class="dash" onclick="GoToMountain()">
-                    <div class="field_display_button_left">산</div>
-                    <div class="field_display_button_right">
-                        <div class="field_display_button_right_up dash">
-                            <div id="field_sec_mountain" class="field_display_button_right_up_left">2Sec</div>
-                            <div class="field_display_button_right_up_right">1-10 ea</div>
-                        </div>
-                        <div class="field_display_button_right_down">Start Collecting</div>
-                    </div>
-                </button>
-                <button id="button_city" class="dash" onclick="GoToCity()">
-                    <div class="field_display_button_left">도시</div>
-                    <div class="field_display_button_right">
-                        <div class="field_display_button_right_up dash">
-                            <div id="field_sec_city" class="field_display_button_right_up_left">2Sec</div>
-                            <div class="field_display_button_right_up_right">1-10 ea</div>
-                        </div>
-                        <div class="field_display_button_right_down">Start Collecting</div>
-                    </div>
-                </button>
-            </div>
-            <div id="field_display_center" class="dash">
-                <pre>
-.　/＼＿／ヽ
-／ _ノ　ヽ_ ＼
-|　　━　 ━　i
-＼ミ (_人_) 彡
-　／￣￣⌒＼/⌒)――――sss
-. /　　　　＿／　
-. |　　　＼
-　＼ 〇_　 ＼
-　　＼ノ.＼_ノ
-                </pre>
-            </div>
-            <div id="field_display_right" class="dash">
-                <div><em id="result_rocket"></em></div>
-            </div>
+        <div class="field_image_bottom">
+          <div class="field_image_rabbit">
+⠀⢀⣆⡉⠭⠭⠕⢂⠤⠤⠤⠄⢀⠀⠀
+⢰⡉⠀⠈⠀⠀⣀⠈⠀⠟⠀⠀⠀⡇⠀
+⠀⠈⠑⠒⠚⠉⠙⡀⠀⠀⠀⢀⠜⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠉⠳⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⡆⠀⠀⠀⠀⡈⡅⠀
+⠀⠀⠀⠀⠀⢀⠜⠀⠀⠀⠀⠀⡇⡇⠀
+⠀⠀⠀⠀⢠⠏⠀⠀⠀⠀⠈⠲⡓⠜⠀
+⠀⠀⠀⣀⡎⠀⠀⠀⠀⠀⠀⠀⢱⠀⠀
+⠀⠀⢰⡁⠰⡀⠀⠀⠀⠀⠀⢠⣃⠀⠀
+⠀⠀⠀⠑⠓⠊⠂⠠⠤⠤⠬⠤⠬⠅⠀
+          </div>
+          <div class="field_image_rabbit">
+⠀⢀⣆⡉⠭⠭⠕⢂⠤⠤⠤⠄⢀⠀⠀
+⢰⡉⠀⠈⠀⠀⣀⠈⠀⠟⠀⠀⠀⡇⠀
+⠀⠈⠑⠒⠚⠉⠙⡀⠀⠀⠀⢀⠜⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠉⠳⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⡆⠀⠀⠀⠀⡈⡅⠀
+⠀⠀⠀⠀⠀⢀⠜⠀⠀⠀⠀⠀⡇⡇⠀
+⠀⠀⠀⠀⢠⠏⠀⠀⠀⠀⠈⠲⡓⠜⠀
+⠀⠀⠀⣀⡎⠀⠀⠀⠀⠀⠀⠀⢱⠀⠀
+⠀⠀⢰⡁⠰⡀⠀⠀⠀⠀⠀⢠⣃⠀⠀
+⠀⠀⠀⠑⠓⠊⠂⠠⠤⠤⠬⠤⠬⠅⠀
+          </div>
         </div>
-        <div id="field_show">
-            <div id="field_story" class="dash">
-                dddd
-            </div>
-            
-            <div id="field_compound" class="dash">
-                <h3>Compound</h3>
-                <button onclick="CompoundItem_Steel()" 
-                class="button_comp dash" id="button_comp_steel">강가</button>
-                <div>Steel : x<em id="compound_steel"></em></div>
-                <button onclick="CompoundItem_Fiber()" 
-                class="button_comp dash" id="button_comp_fiber">강가</button>
-                <div>Fiber : x<em id="compound_fiber"></em></div>
-                <button onclick="CompoundItem_Fuel()" 
-                class="button_comp dash" id="button_comp_fuel">강가</button>
-                <div>Fuel : x<em id="compound_fuel"></em></div>
-                <!-- <button onclick="CompoundItem()">가공</button> -->
-            </div>
-            
-            <div id="field_input" class="dash">
-                <h3>Rocket Input</h3>
-                <div class="field_input_item">
-                    <button onclick="AddInput(eCompound.steel, -1)" class="dash">left</button>
-                    <span>Steel : <em id="input_steel"></em></span>
-                    <button onclick="AddInput(eCompound.steel, 1)" class="dash">right</button>
-                </div>
-                <div class="field_input_item">
-                    <button onclick="AddInput(eCompound.fiber, -1)" class="dash">left</button>
-                    <span>Fiber : <em id="input_fiber"></em></span>
-                    <button onclick="AddInput(eCompound.fiber, 1)" class="dash">right</button>
-                </div>
-                <div class="field_input_item">
-                    <button onclick="AddInput(eCompound.fuel, -1)" class="dash">left</button>
-                    <span>Fuel : <em id="input_fuel"></em></span>
-                    <button onclick="AddInput(eCompound.fuel, 1)" class="dash">right</button>
-                </div>
-                <button onclick="BuildRocket()">로켓 제작</button>
-            </div>
-            
-            <div id="field_rocket" class="dash">
-                <h3>Rocket</h3>
-                <div><em id="percent_rocket"></em>%</div>
-                <hr width="100%" />
-                <button onclick="LaunchRocket()">로켓 발사</button>
-            </div>
+      </div>
+      <div id="field_display_right" class="dash">
+        <div><em id="result_rocket"></em></div>
+      </div>
+    </div>
+    <div id="field_show">
+      <div id="field_story" class="dash">dddd</div>
+
+      <div id="field_compound" class="dash">
+        <h3>Compound</h3>
+        <button
+          onclick="CompoundItem_Steel()"
+          class="button_comp dash"
+          id="button_comp_steel"
+        >
+          강가
+        </button>
+        <div>Steel : x<em id="compound_steel"></em></div>
+        <button
+          onclick="CompoundItem_Fiber()"
+          class="button_comp dash"
+          id="button_comp_fiber"
+        >
+          강가
+        </button>
+        <div>Fiber : x<em id="compound_fiber"></em></div>
+        <button
+          onclick="CompoundItem_Fuel()"
+          class="button_comp dash"
+          id="button_comp_fuel"
+        >
+          강가
+        </button>
+        <div>Fuel : x<em id="compound_fuel"></em></div>
+        <!-- <button onclick="CompoundItem()">가공</button> -->
+      </div>
+
+      <div id="field_input" class="dash">
+        <h3>Rocket Input</h3>
+        <div class="field_input_item">
+          <button onclick="AddInput(eCompound.steel, -1)" class="dash">
+            left
+          </button>
+          <span>Steel : <em id="input_steel"></em></span>
+          <button onclick="AddInput(eCompound.steel, 1)" class="dash">
+            right
+          </button>
         </div>
-    </body>
+        <div class="field_input_item">
+          <button onclick="AddInput(eCompound.fiber, -1)" class="dash">
+            left
+          </button>
+          <span>Fiber : <em id="input_fiber"></em></span>
+          <button onclick="AddInput(eCompound.fiber, 1)" class="dash">
+            right
+          </button>
+        </div>
+        <div class="field_input_item">
+          <button onclick="AddInput(eCompound.fuel, -1)" class="dash">
+            left
+          </button>
+          <span>Fuel : <em id="input_fuel"></em></span>
+          <button onclick="AddInput(eCompound.fuel, 1)" class="dash">
+            right
+          </button>
+        </div>
+        <button onclick="BuildRocket()">로켓 제작</button>
+      </div>
+
+      <div id="field_rocket" class="dash">
+        <h3>Rocket</h3>
+        <div><em id="percent_rocket"></em>%</div>
+        <hr width="100%" />
+        <button onclick="LaunchRocket()">로켓 발사</button>
+      </div>
+    </div>
+  </body>
 </html>

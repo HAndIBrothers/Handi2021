@@ -41,6 +41,8 @@ function Open() {
     // :: UI
     this.UpdateUI();
     UpdateText_Compound();
+
+    moveRabbit()
 }
 // #endregion
 
@@ -623,3 +625,14 @@ function UpdateText_Log() {
     TEXT_Field.innerHTML = stringData;
 }
 //#endregion
+
+function moveRabbit() {
+    let rabbits = document.querySelector('.field_image_bottom');
+    // let rabbitsAlign = rabbits.style.justifyContent.value;
+    console.log(rabbits)
+    // let timerId = setInterval(() => {
+    //     rabbitsAlign = rabbitsAlign == "center" ? "space-between" : "center";
+    // }, 1000);
+}
+
+
