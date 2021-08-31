@@ -76,11 +76,11 @@
             <div id="field_compound" class="dash">
                 <h3>Compound</h3>
                 <button onclick="CompoundItem_Steel()" 
-                class="button_comp dash" id="button_comp_steel">Spaceship Core</button>
-                <div>Spaceship Core : x<em id="compound_steel"></em></div>
+                class="button_comp dash" id="button_comp_core">Spaceship Core</button>
+                <div>Spaceship Core : x<em id="compound_core"></em></div>
                 <button onclick="CompoundItem_Fiber()" 
-                class="button_comp dash" id="button_comp_fiber">Spaceship Parts</button>
-                <div>Spaceship Parts : x<em id="compound_fiber"></em></div>
+                class="button_comp dash" id="button_comp_parts">Spaceship Parts</button>
+                <div>Spaceship Parts : x<em id="compound_parts"></em></div>
                 <button onclick="CompoundItem_Fuel()" 
                 class="button_comp dash" id="button_comp_fuel">Carrot Fuel 1L</button>
                 <div>Carrot Fuel 1L : x<em id="compound_fuel"></em></div>
@@ -90,14 +90,14 @@
             <div id="field_input" class="dash">
                 <h3>Rocket Input</h3>
                 <div class="field_input_item">
-                    <button onclick="AddInput(eCompound.steel, -1)" class="dash">left</button>
-                    <span>Core : <em id="input_steel"></em></span>
-                    <button onclick="AddInput(eCompound.steel, 1)" class="dash">right</button>
+                    <button onclick="AddInput(eCompound.core, -1)" class="dash">left</button>
+                    <span>Core : <em id="input_core"></em></span>
+                    <button onclick="AddInput(eCompound.core, 1)" class="dash">right</button>
                 </div>
                 <div class="field_input_item">
-                    <button onclick="AddInput(eCompound.fiber, -1)" class="dash">left</button>
-                    <span>Parts : <em id="input_fiber"></em></span>
-                    <button onclick="AddInput(eCompound.fiber, 1)" class="dash">right</button>
+                    <button onclick="AddInput(eCompound.parts, -1)" class="dash">left</button>
+                    <span>Parts : <em id="input_parts"></em></span>
+                    <button onclick="AddInput(eCompound.parts, 1)" class="dash">right</button>
                 </div>
                 <div class="field_input_item">
                     <button onclick="AddInput(eCompound.fuel, -1)" class="dash">left</button>

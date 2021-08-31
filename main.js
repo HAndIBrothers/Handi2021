@@ -7,13 +7,13 @@ var Item = {
     carrot : 0
 }
 var Compound = {
-    steel : 0,
-    fiber : 0,
+    core : 0,
+    parts : 0,
     fuel : 0
 }
 var Input = {
-    steel : 0,
-    fiber : 0,
+    core : 0,
+    parts : 0,
     fuel : 0
 }
 var queue_log;
@@ -38,6 +38,31 @@ function Open() {
     // :: Log
     queue_log = new Queue();
 
+    // :: Button : Mouse Over
+    var BUTTON_City = document.getElementById("button_city");
+    BUTTON_City.addEventListener("mouseover", () => {
+        BUTTON_City.style.backgroundColor = "#808080";
+    });
+    BUTTON_City.addEventListener("mouseleave", () => {
+        BUTTON_City.style.backgroundColor = "#000000";
+    });
+
+    var BUTTON_Plantation = document.getElementById("button_mountain");
+    BUTTON_Plantation.addEventListener("mouseover", () => {
+        BUTTON_Plantation.style.backgroundColor = "#808080";
+    });
+    BUTTON_Plantation.addEventListener("mouseleave", () => {
+        BUTTON_Plantation.style.backgroundColor = "#000000";
+    });
+
+    var BUTTON_Field = document.getElementById("button_river");
+    BUTTON_Field.addEventListener("mouseover", () => {
+        BUTTON_Field.style.backgroundColor = "#808080";
+    });
+    BUTTON_Field.addEventListener("mouseleave", () => {
+        BUTTON_Field.style.backgroundColor = "#000000";
+    });
+
     // :: UI
     this.UpdateUI();
     UpdateText_Compound();
@@ -55,13 +80,13 @@ function ResetItem() {
     UpdateUI();
 }
 function ResetCompound() {
-    Compound.steel = 0;
-    Compound.fiber = 0;
+    Compound.core = 0;
+    Compound.parts = 0;
     Compound.fuel = 0;
 }
 function ResetInput() {
-    Input.steel = 0;
-    Input.fiber = 0;
+    Input.core = 0;
+    Input.parts = 0;
     Input.fuel = 0;
     
     this.UpdateUI();
@@ -100,6 +125,7 @@ function GoToCity() {
     // :: Plastic
     var BUTTON_Field = document.getElementById("button_city");
     BUTTON_Field.disabled = true;
+    BUTTON_Field.style.backgroundColor = "#cccc00";
     this.WaitAndDo(eArea.city, () => {
         var metal = this.GetRandom(1, 3);
         AddItem(eItem.metal, metal);
@@ -114,6 +140,7 @@ function GoToCity() {
         + " / Glass : " + glass + " / Plastic : " + plastic);
         UpdateText_Log();
 
+        BUTTON_Field.style.backgroundColor = "#000000";
         BUTTON_Field.disabled = false;
     });
 }
@@ -121,6 +148,7 @@ function GoToField() {
     // :: Glass
     var BUTTON_Field = document.getElementById("button_river");
     BUTTON_Field.disabled = true;
+    BUTTON_Field.style.backgroundColor = "#cccc00";
     this.WaitAndDo(eArea.river, () => {
     
         // :: Carrot
@@ -130,6 +158,7 @@ function GoToField() {
         queue_log.enqueue("From Field : Carrot : " + carrot);
         UpdateText_Log();
 
+        BUTTON_Field.style.backgroundColor = "#000000";
         BUTTON_Field.disabled = false;
     });
 }
@@ -192,13 +221,13 @@ function UpdateUI() {
     this.UpdateItem(eItem.carrot);
     
     // :: Compound
-    UpdateCompound(eCompound.steel);
-    UpdateCompound(eCompound.fiber);
+    UpdateCompound(eCompound.core);
+    UpdateCompound(eCompound.parts);
     UpdateCompound(eCompound.fuel);
     
     // :: Input
-    UpdateInput(eCompound.steel);
-    UpdateInput(eCompound.fiber);
+    UpdateInput(eCompound.core);
+    UpdateInput(eCompound.parts);
     UpdateInput(eCompound.fuel);
     
     // :: Rocket
@@ -282,37 +311,37 @@ function UpdateItem(eType) {
 
 //#region Compound
 const eCompound = {
-    steel : 101,
-    fiber : 102,
+    core : 101,
+    parts : 102,
     fuel : 103
 }
 const pCompound = {
-    steel : "compound_steel",
-    fiber : "compound_fiber",
+    core : "compound_core",
+    parts : "compound_parts",
     fuel : "compound_fuel"
 }
 const pCompoundButton = {
-    steel : "button_comp_steel",
-    fiber : "button_comp_fiber",
+    core : "button_comp_core",
+    parts : "button_comp_parts",
     fuel : "button_comp_fuel"
 }
 function GetCompound(eType) {
     switch(eType) {
-        case eCompound.steel:
-            return Compound.steel;
-        case eCompound.fiber:
-            return Compound.fiber;
+        case eCompound.core:
+            return Compound.core;
+        case eCompound.parts:
+            return Compound.parts;
         case eCompound.fuel:
             return Compound.fuel;
     }
 }
 function AddCompound(eType, addValue) {
     switch(eType) {
-        case eCompound.steel:
-            Compound.steel += addValue;
+        case eCompound.core:
+            Compound.core += addValue;
             break;
-        case eCompound.fiber:
-            Compound.fiber += addValue;
+        case eCompound.parts:
+            Compound.parts += addValue;
             break;
         case eCompound.fuel:
             Compound.fuel += addValue;
@@ -323,11 +352,11 @@ function AddCompound(eType, addValue) {
 function UpdateCompound(eType) {
     var TEXT_Field;
     switch(eType) {
-        case eCompound.steel:
-            TEXT_Field = document.getElementById(pCompound.steel);
+        case eCompound.core:
+            TEXT_Field = document.getElementById(pCompound.core);
             break;
-        case eCompound.fiber:
-            TEXT_Field = document.getElementById(pCompound.fiber);
+        case eCompound.parts:
+            TEXT_Field = document.getElementById(pCompound.parts);
             break;
         case eCompound.fuel:
             TEXT_Field = document.getElementById(pCompound.fuel);
@@ -339,35 +368,35 @@ function UpdateCompound(eType) {
 
 //#region Input
 const pInput = {
-    steel : "input_steel",
-    fiber : "input_fiber",
+    core : "input_core",
+    parts : "input_parts",
     fuel : "input_fuel"
 }
 function GetInput(eType) {
     switch(eType) {
-        case eCompound.steel:
-            return Input.steel;
-        case eCompound.fiber:
-            return Input.fiber;
+        case eCompound.core:
+            return Input.core;
+        case eCompound.parts:
+            return Input.parts;
         case eCompound.fuel:
             return Input.fuel;
     }
 }
 function AddInput(eType, addValue) {
     switch(eType) {
-        case eCompound.steel:
-            Input.steel += addValue;
-            if(Input.steel < 0)
-                Input.steel = 0;
-            if(Input.steel > Compound.steel)
-                Input.steel = Compound.steel;
+        case eCompound.core:
+            Input.core += addValue;
+            if(Input.core < 0)
+                Input.core = 0;
+            if(Input.core > Compound.core)
+                Input.core = Compound.core;
             break;
-        case eCompound.fiber:
-            Input.fiber += addValue;
-            if(Input.fiber < 0)
-                Input.fiber = 0;
-            if(Input.fiber > Compound.fiber)
-                Input.fiber = Compound.fiber;
+        case eCompound.parts:
+            Input.parts += addValue;
+            if(Input.parts < 0)
+                Input.parts = 0;
+            if(Input.parts > Compound.parts)
+                Input.parts = Compound.parts;
             break;
         case eCompound.fuel:
             Input.fuel += addValue;
@@ -384,11 +413,11 @@ function AddInput(eType, addValue) {
 function UpdateInput(eType) {
     var TEXT_Field;
     switch(eType) {
-        case eCompound.steel:
-            TEXT_Field = document.getElementById(pInput.steel);
+        case eCompound.core:
+            TEXT_Field = document.getElementById(pInput.core);
             break;
-        case eCompound.fiber:
-            TEXT_Field = document.getElementById(pInput.fiber);
+        case eCompound.parts:
+            TEXT_Field = document.getElementById(pInput.parts);
             break;
         case eCompound.fuel:
             TEXT_Field = document.getElementById(pInput.fuel);
@@ -407,12 +436,12 @@ function CompoundItem_Steel() {
     
     AddItem(eItem.metal, -min * 15);
     AddItem(eItem.plastic, -min * 20)
-    AddCompound(eCompound.steel, min);
+    AddCompound(eCompound.core, min);
     
-    if(Input.steel === 0)
-        Input.steel = Compound.steel;
+    if(Input.core === 0)
+        Input.core = Compound.core;
     
-    UpdateInput(eCompound.steel);
+    UpdateInput(eCompound.core);
 
     queue_log.enqueue("Metal x" + metalCompNum * 15
     + " / Plastic x" + plasticCompNum + " => Steel x" + metalCompNum);
@@ -421,7 +450,7 @@ function CompoundItem_Steel() {
     UpdateText_Compound();
 }
 function UpdateText_CompoundSteel() {
-    var TEXT_Field = document.getElementById(pCompoundButton.steel);
+    var TEXT_Field = document.getElementById(pCompoundButton.core);
     TEXT_Field.innerHTML
     = "Metal " + Item.metal + "/15" + " : Plastic " + Item.plastic + "/20";
 
@@ -443,12 +472,12 @@ function CompoundItem_Fiber() {
     AddItem(eItem.rubber, -min * 10);
     AddItem(eItem.metal, -min * 5);
     
-    AddCompound(eCompound.fiber, min);
+    AddCompound(eCompound.parts, min);
     
-    if(Input.fiber === 0)
-        Input.fiber = Compound.fiber;
+    if(Input.parts === 0)
+        Input.parts = Compound.parts;
     
-    UpdateInput(eCompound.fiber);
+    UpdateInput(eCompound.parts);
 
     queue_log.enqueue("Glass x" + min * 5 + " / Rubber Tree x" + min * 10 
     + " / Metal x" + min * 5
@@ -458,7 +487,7 @@ function CompoundItem_Fiber() {
     UpdateText_Compound();
 }
 function UpdateText_CompoundFiber() {
-    var TEXT_Field = document.getElementById(pCompoundButton.fiber);
+    var TEXT_Field = document.getElementById(pCompoundButton.parts);
     TEXT_Field.innerHTML
     = "Glass " + Item.glass + "/5 | "
     + "Rubber Tree " + Item.rubber + "/10 | "
@@ -517,16 +546,23 @@ function UpdateText_Compound() {
 
 // #region Build Rocket
 var percent_rocket;
+var cNeed = {
+    core : 10,
+    parts : 20,
+    fuel : 15
+}
 function BuildRocket() {
-    var steelDif = 40 - Math.abs(Compound.steel - 40);
-    var fiberDif = 30 - Math.abs(Compound.fiber - 30);
-    var fuelDif = 30 - Math.abs(Compound.fuel - 30);
-    this.percent_rocket = steelDif + fiberDif + fuelDif;
+    // :: 여기 하는 중
+    var coreDif = (Input.core / cNeed.core) * 100;
+    var partsDif = (Input.parts / cNeed.parts) * 100;
+    var fuelDif = (Input.fuel / cNeed.fuel) * 100;
+    this.percent_rocket = (coreDif + partsDif + fuelDif) / 3;
+    this.percent_rocket = parseInt(this.percent_rocket);
     
     this.UpdatePercent_Rocket();
     
-    AddCompound(eCompound.steel, -Input.steel);
-    AddCompound(eCompound.fiber, -Input.fiber);
+    AddCompound(eCompound.core, -Input.core);
+    AddCompound(eCompound.parts, -Input.parts);
     AddCompound(eCompound.fuel, -Input.fuel);
     this.ResetInput();
 
