@@ -28,9 +28,20 @@ button:hover {
 
 #field_item {
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   width: 1024px;
   height: 30px;
   padding-top: 10px;
+}
+
+#field_rabbit {
+  width: 100px;
+  text-align: right;
+}
+#field_material {
+  width: 824px;
 }
 
 #field_display {
@@ -175,5 +186,16 @@ span {
 }
 
 #field_display_right {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
   width: 256px;
+  background-color: sienna;
+}
+
+.button_quest {
+  margin: 0px auto;
+  margin-top: 10px;
+  width: 240px;
+  background-color: red;
 }

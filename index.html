@@ -6,15 +6,18 @@
     </head>
     <body onload="Open()">
         <div id="field_item" class="dash">
-            <span>[ Metal : x<em id="item_metal"></em> ]
-                &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
-            <span>[ Glass : x<em id="item_glass"></em> ]
-                &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
-            <span>[ Plastic : x<em id="item_plastic"></em> ]
-                &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
-            <span>[ Rubber : x<em id="item_rubber_tree"></em> ]
-                &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
-            <span>[ Carrot : x<em id="item_tree"></em> ]</span>
+            <div id="field_rabbit">🐇🐇🐇🐇</div>
+            <div id="field_material">
+                <span>[ Metal : x<em id="item_metal"></em> ]
+                    &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+                <span>[ Glass : x<em id="item_glass"></em> ]
+                    &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+                <span>[ Plastic : x<em id="item_plastic"></em> ]
+                    &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+                <span>[ Rubber : x<em id="item_rubber_tree"></em> ]
+                    &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+                <span>[ Carrot : x<em id="item_tree"></em> ]</span>
+            </div>
         </div>
         <div id="field_display">
             <div id="field_display_left" class="dash">
@@ -65,7 +68,17 @@
                 </pre>
             </div>
             <div id="field_display_right" class="dash">
-                <div><em id="result_rocket"></em></div>
+                <button id="quest_mother" class="button_quest dash" onclick="">
+                    <div class="field_display_quest_up dash">
+                        Mother's Help
+                    </div>
+                    <div class="field_display_quest_mid dash">
+                        <span>Quest : </span><span>1st Failed</span>
+                    </div>
+                    <div class="field_display_quest_down dash">
+                        Hello, Mom
+                    </div>
+                </button>
             </div>
         </div>
         <div id="field_show">

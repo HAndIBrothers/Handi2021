@@ -17,7 +17,27 @@ var Input = {
     fuel : 0
 }
 var queue_log;
+class NumRabbits {
+    constructor() {
+        this.working = 0;
+        this.together = 2;
+    }
+    getWorking() {
+        return this.working;
+    }
+    getTogether() {
+        return this.together;
+    }
+    getRemains() {
+        return this.together - this.working;
+    }
+}
+var iCurRabbits;
 function Open() {
+    // :: Reset : Rabbit
+    iCurRabbits = new NumRabbits();
+    ShowRabbits();
+
     // :: Reset : Item
     ResetItem();
     
@@ -39,6 +59,26 @@ function Open() {
     queue_log = new Queue();
 
     // :: Button : Mouse Over
+    SetMouseOver();
+
+    // :: UI
+    this.UpdateUI();
+    UpdateText_Compound();
+}
+// #endregion
+
+//#region Rabbits
+function ShowRabbits() {
+    var doc = document.getElementById("field_rabbit");
+    doc.innerHTML = "";
+    doc.innerHTML = 
+        iCurRabbits.getTogether() == 2 ? "🐇🐇" : 
+        iCurRabbits.getTogether() == 3 ? "🐇🐇🐇" : "🐇🐇🐇🐇";
+}
+//#endregion
+
+//#region MouseOver
+function SetMouseOver() {
     var BUTTON_City = document.getElementById("button_city");
     BUTTON_City.addEventListener("mouseover", () => {
         BUTTON_City.style.backgroundColor = "#808080";
@@ -62,12 +102,8 @@ function Open() {
     BUTTON_Field.addEventListener("mouseleave", () => {
         BUTTON_Field.style.backgroundColor = "#000000";
     });
-
-    // :: UI
-    this.UpdateUI();
-    UpdateText_Compound();
 }
-// #endregion
+//#endregion
 
 // #region Reset
 function ResetItem() {
@@ -105,11 +141,17 @@ const pAreaSec = {
     city : "field_sec_city"
 }
 function GoToPlantation() {
+    if(iCurRabbits.getRemains() <= 0) {
+        return;
+    } else {
+        iCurRabbits.working += 1;
+    }
     // :: Metal
     var BUTTON_Field = document.getElementById("button_mountain");
     BUTTON_Field.disabled = true;
     BUTTON_Field.style.backgroundColor = "#cccc00";
-    this.WaitAndDo(eArea.mountain, () => {    
+    this.WaitAndDo(eArea.mountain, () => {
+
         // :: Rubber
         var rubber = this.GetRandom(1, 3);
         AddItem(eItem.rubber, rubber);
@@ -119,14 +161,23 @@ function GoToPlantation() {
 
         BUTTON_Field.style.backgroundColor = "#000000";
         BUTTON_Field.disabled = false;
+
+        iCurRabbits.working -= 1;
     });
 }
 function GoToCity() {
+    if(iCurRabbits.getRemains() <= 0) {
+        return;
+    } else {
+        iCurRabbits.working += 1;
+    }
+
     // :: Plastic
     var BUTTON_Field = document.getElementById("button_city");
     BUTTON_Field.disabled = true;
     BUTTON_Field.style.backgroundColor = "#cccc00";
     this.WaitAndDo(eArea.city, () => {
+
         var metal = this.GetRandom(1, 3);
         AddItem(eItem.metal, metal);
         
@@ -142,9 +193,17 @@ function GoToCity() {
 
         BUTTON_Field.style.backgroundColor = "#000000";
         BUTTON_Field.disabled = false;
+
+        iCurRabbits.working -= 1;
     });
 }
 function GoToField() {
+    if(iCurRabbits.getRemains() <= 0) {
+        return;
+    } else {
+        iCurRabbits.working += 1;
+    }
+
     // :: Glass
     var BUTTON_Field = document.getElementById("button_river");
     BUTTON_Field.disabled = true;
@@ -160,6 +219,8 @@ function GoToField() {
 
         BUTTON_Field.style.backgroundColor = "#000000";
         BUTTON_Field.disabled = false;
+
+        iCurRabbits.working -= 1;
     });
 }
 function GetRandom(min, max) {
@@ -433,6 +494,9 @@ function CompoundItem_Steel() {
     var plasticCompNum = parseInt(Item.plastic / 20);
 
     var min = Math.min(metalCompNum, plasticCompNum);
+
+    if(min <= 0)
+        return;
     
     AddItem(eItem.metal, -min * 15);
     AddItem(eItem.plastic, -min * 20)
@@ -468,6 +532,10 @@ function CompoundItem_Fiber() {
     var metalCompNum = parseInt(Item.metal / 5);
     
     var min = Math.min(metalCompNum, glassCompNum, rubberTreeCompNum);
+
+    if(min <= 0)
+        return;
+
     AddItem(eItem.glass, -min * 5);
     AddItem(eItem.rubber, -min * 10);
     AddItem(eItem.metal, -min * 5);
@@ -505,6 +573,9 @@ function UpdateText_CompoundFiber() {
 // #region Compound : Fuel
 function CompoundItem_Fuel() {
     var treeCompNum = parseInt(Item.carrot / 10);
+
+    if(treeCompNum <= 0)
+        return;
     
     AddItem(eItem.carrot, -treeCompNum * 10);
     AddCompound(eCompound.fuel, treeCompNum);
@@ -662,8 +733,7 @@ function UpdateText_Log() {
     for(var index = 0; index < count; index++) {
         stringData += `<div class="text_log">${tempStack.pop()}</div>`;
     }
-
-    console.log(stringData);
+    
     TEXT_Field.innerHTML = stringData;
 }
 //#endregion
