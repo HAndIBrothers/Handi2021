@@ -45,8 +45,8 @@ function Open() {
     ResetCompound();
     
     // :: Reset : Area
-    ResetSec(eArea.river);
-    ResetSec(eArea.mountain);
+    ResetSec(eArea.field);
+    ResetSec(eArea.plantation);
     ResetSec(eArea.city);
 
     // :: Reset : Input
@@ -54,6 +54,12 @@ function Open() {
     
     // :: Reset : Percent
     this.percent_rocket = 0;
+    this.iExtraPercent = 0;
+
+    // :: Reset : Level
+    this.iLevel_City = 0;
+    this.iLevel_Plantation = 0;
+    this.iLevel_Field = 0;
     
     // :: Log
     queue_log = new Queue();
@@ -64,6 +70,9 @@ function Open() {
     // :: UI
     this.UpdateUI();
     UpdateText_Compound();
+    UpdateText_PlantationEa();
+    UpdateText_CityEa();
+    UpdateText_FieldEa();
 }
 // #endregion
 
@@ -87,7 +96,7 @@ function SetMouseOver() {
         BUTTON_City.style.backgroundColor = "#000000";
     });
 
-    var BUTTON_Plantation = document.getElementById("button_mountain");
+    var BUTTON_Plantation = document.getElementById("button_plantation");
     BUTTON_Plantation.addEventListener("mouseover", () => {
         BUTTON_Plantation.style.backgroundColor = "#808080";
     });
@@ -95,7 +104,7 @@ function SetMouseOver() {
         BUTTON_Plantation.style.backgroundColor = "#000000";
     });
 
-    var BUTTON_Field = document.getElementById("button_river");
+    var BUTTON_Field = document.getElementById("button_field");
     BUTTON_Field.addEventListener("mouseover", () => {
         BUTTON_Field.style.backgroundColor = "#808080";
     });
@@ -131,14 +140,34 @@ function ResetInput() {
 
 // #region Go
 const eArea = {
-    river : 1,
-    mountain : 2,
+    field : 1,
+    plantation : 2,
     city : 3
 }
 const pAreaSec = {
-    river : "field_sec_river",
-    mountain : "field_sec_mountain",
+    field : "field_sec_field",
+    plantation : "field_sec_plantation",
     city : "field_sec_city"
+}
+
+var iLevel_Plantation;
+const dPlantation = {
+    0 : {
+        min : 1,
+        max : 3
+    },
+    1 : {
+        min : 2,
+        max : 6
+    },
+    2 : {
+        min : 3,
+        max : 12
+    },
+    3 : {
+        min : 6,
+        max : 24
+    }
 }
 function GoToPlantation() {
     if(iCurRabbits.getRemains() <= 0) {
@@ -147,13 +176,13 @@ function GoToPlantation() {
         iCurRabbits.working += 1;
     }
     // :: Metal
-    var BUTTON_Field = document.getElementById("button_mountain");
+    var BUTTON_Field = document.getElementById("button_plantation");
     BUTTON_Field.disabled = true;
     BUTTON_Field.style.backgroundColor = "#cccc00";
-    this.WaitAndDo(eArea.mountain, () => {
+    this.WaitAndDo(eArea.plantation, () => {
 
         // :: Rubber
-        var rubber = this.GetRandom(1, 3);
+        var rubber = this.GetRandom(dPlantation[iLevel_Plantation].min, dPlantation[iLevel_Plantation].max);
         AddItem(eItem.rubber, rubber);
     
         queue_log.enqueue("From Plantation : Rubber : " + rubber);
@@ -164,6 +193,30 @@ function GoToPlantation() {
 
         iCurRabbits.working -= 1;
     });
+}
+function UpdateText_PlantationEa() {
+    document.getElementById("field_plantation_ea").innerHTML = 
+        dPlantation[iLevel_Plantation].min + "~" + dPlantation[iLevel_Plantation].max + " ea";
+}
+
+var iLevel_City;
+const dCity = {
+    0 : {
+        min : 1,
+        max : 3
+    },
+    1 : {
+        min : 2,
+        max : 6
+    },
+    2 : {
+        min : 3,
+        max : 12
+    },
+    3 : {
+        min : 6,
+        max : 24
+    }
 }
 function GoToCity() {
     if(iCurRabbits.getRemains() <= 0) {
@@ -197,6 +250,30 @@ function GoToCity() {
         iCurRabbits.working -= 1;
     });
 }
+function UpdateText_CityEa() {
+    document.getElementById("field_city_ea").innerHTML = 
+        dCity[iLevel_City].min + "~" + dCity[iLevel_City].max + " ea";
+}
+
+var iLevel_Field;
+const dField = {
+    0 : {
+        min : 1,
+        max : 3
+    },
+    1 : {
+        min : 2,
+        max : 6
+    },
+    2 : {
+        min : 3,
+        max : 12
+    },
+    3 : {
+        min : 6,
+        max : 24
+    }
+}
 function GoToField() {
     if(iCurRabbits.getRemains() <= 0) {
         return;
@@ -205,10 +282,10 @@ function GoToField() {
     }
 
     // :: Glass
-    var BUTTON_Field = document.getElementById("button_river");
+    var BUTTON_Field = document.getElementById("button_field");
     BUTTON_Field.disabled = true;
     BUTTON_Field.style.backgroundColor = "#cccc00";
-    this.WaitAndDo(eArea.river, () => {
+    this.WaitAndDo(eArea.field, () => {
     
         // :: Carrot
         var carrot = this.GetRandom(1, 3);
@@ -223,6 +300,12 @@ function GoToField() {
         iCurRabbits.working -= 1;
     });
 }
+function UpdateText_FieldEa() {
+    document.getElementById("field_field_ea").innerHTML = 
+        dField[iLevel_Field].min + "~" + dField[iLevel_Field].max + " ea";
+}
+
+
 function GetRandom(min, max) {
     return Math.floor((Math.random() * (max - min + 1)) + min);
 }
@@ -243,9 +326,9 @@ function WaitAndDo(rArea, Do) {
 }
 function GetSec(rArea) {
     switch(rArea) {
-        case eArea.river:
+        case eArea.field:
             return 3;
-        case eArea.mountain:
+        case eArea.plantation:
             return 3;
         case eArea.city:
             return 3;
@@ -256,12 +339,12 @@ function ResetSec(rArea) {
 }
 function SetSec(rArea, count, index) {
     switch(rArea) {
-        case eArea.river:
-            document.getElementById(pAreaSec.river).innerHTML
+        case eArea.field:
+            document.getElementById(pAreaSec.field).innerHTML
             = (count - index) + " sec";
             break;
-        case eArea.mountain:
-            document.getElementById(pAreaSec.mountain).innerHTML
+        case eArea.plantation:
+            document.getElementById(pAreaSec.plantation).innerHTML
             = (count - index) + " sec";
             break;
         case eArea.city:
@@ -644,7 +727,14 @@ function BuildRocket() {
 }
 function UpdatePercent_Rocket() {
     var TEXT_Rocket = document.getElementById('percent_rocket');
+    var TEXT_Extra = document.getElementById('percent_extra');
     TEXT_Rocket.innerHTML = this.percent_rocket;
+
+    if(iExtraPercent == 0) {
+        TEXT_Extra.innerHTML = "";
+    } else {
+        TEXT_Extra.innerHTML = "+" + iExtraPercent + "%";
+    }
 }
 function ResetPercent_Rocket() {
     this.percent_rocket = 0;
@@ -735,5 +825,59 @@ function UpdateText_Log() {
     }
     
     TEXT_Field.innerHTML = stringData;
+}
+//#endregion
+
+//#region Quest
+function UpdateStatus_Quest() {
+
+}
+function Quest_Mother() {
+    if(iCurRabbits.together == 2) {
+        iCurRabbits.together = 3;
+        ShowRabbits();
+    }
+    document.getElementById("quest_mother").style.display = "none";
+}
+
+var iExtraPercent;
+function Quest_Father() {
+    if(iCurRabbits.together == 3) {
+        iCurRabbits.together = 4;
+        ShowRabbits();
+    } else if(iCurRabbits.together != 4) {
+        return;
+    }
+
+    iExtraPercent += 1;
+    if(iExtraPercent >= 5) {
+        iExtraPercent = 5;
+        document.getElementById("quest_father").style.display = "none";
+    }
+    UpdatePercent_Rocket();
+}
+function Quest_Upgrade_City() {
+    iLevel_City += 1;
+    if(iLevel_City >= 3) {
+        iLevel_City = 3;
+        document.getElementById("quest_upgrade_city").style.display = "none";
+    }
+    UpdateText_CityEa();
+}
+function Quest_Upgrade_Field() {
+    iLevel_Field += 1;
+    if(iLevel_Field >= 3) {
+        iLevel_Field = 3;
+        document.getElementById("quest_upgrade_field").style.display = "none";
+    }
+    UpdateText_FieldEa();
+}
+function Quest_Upgrade_Plantation() {
+    iLevel_Plantation += 1;
+    if(iLevel_Plantation >= 3) {
+        iLevel_Plantation = 3;
+        document.getElementById("quest_upgrade_plantation").style.display = "none";
+    }
+    UpdateText_PlantationEa();
 }
 //#endregion

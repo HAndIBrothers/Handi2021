@@ -26,29 +26,29 @@
                     <div class="field_display_button_right">
                         <div class="field_display_button_right_up dash">
                             <div id="field_sec_city" class="field_display_button_right_up_left">2Sec</div>
-                            <div class="field_display_button_right_up_right">1-3 ea</div>
+                            <div id="field_city_ea" class="field_display_button_right_up_right">1-3 ea</div>
                         </div>
                         <div class="field_display_button_right_down">Start Collecting</div>
                     </div>
                 </button>
 
-                <button id="button_mountain" class="dash" onclick="GoToPlantation()">
+                <button id="button_plantation" class="dash" onclick="GoToPlantation()">
                     <div class="field_display_button_left">Rubber Plantation</div>
                     <div class="field_display_button_right">
                         <div class="field_display_button_right_up dash">
-                            <div id="field_sec_mountain" class="field_display_button_right_up_left">2Sec</div>
-                            <div class="field_display_button_right_up_right">1-3 ea</div>
+                            <div id="field_sec_plantation" class="field_display_button_right_up_left">2Sec</div>
+                            <div id="field_plantation_ea" class="field_display_button_right_up_right">1-3 ea</div>
                         </div>
                         <div class="field_display_button_right_down">Start Collecting</div>
                     </div>
                 </button>
 
-                <button id="button_river" class="dash" onclick="GoToField()">
+                <button id="button_field" class="dash" onclick="GoToField()">
                     <div class="field_display_button_left">Carrot Fields</div>
                     <div class="field_display_button_right">
                         <div class="field_display_button_right_up dash">
-                            <div id="field_sec_river" class="field_display_button_right_up_left">2Sec</div>
-                            <div class="field_display_button_right_up_right">1-3 ea</div>
+                            <div id="field_sec_field" class="field_display_button_right_up_left">2Sec</div>
+                            <div id="field_field_ea" class="field_display_button_right_up_right">1-3 ea</div>
                         </div>
                         <div class="field_display_button_right_down">Start Collecting</div>
                     </div>
@@ -68,17 +68,67 @@
                 </pre>
             </div>
             <div id="field_display_right" class="dash">
-                <button id="quest_mother" class="button_quest dash" onclick="">
-                    <div class="field_display_quest_up dash">
-                        Mother's Help
-                    </div>
-                    <div class="field_display_quest_mid dash">
+                <button id="quest_mother" class="button_quest dash" onclick="Quest_Mother()">
+                    <div class="field_display_quest_up">
                         <span>Quest : </span><span>1st Failed</span>
                     </div>
-                    <div class="field_display_quest_down dash">
+                    <div class="field_display_quest_mid">
+                        Mother's Help
+                    </div>
+                    <div class="field_display_quest_down">
                         Hello, Mom
                     </div>
                 </button>
+
+                <button id="quest_father" class="button_quest dash" onclick="Quest_Father()">
+                    <div class="field_display_quest_up">
+                        <span>Quest : </span><span>3rd Failed</span>
+                    </div>
+                    <div class="field_display_quest_mid">
+                        Father's Help
+                    </div>
+                    <div class="field_display_quest_down">
+                        Hello, Pop
+                    </div>
+                </button>
+
+                <button id="quest_upgrade_city" class="button_quest dash" onclick="Quest_Upgrade_City()">
+                    <div class="field_display_quest_up">
+                        <span>Quest : </span><span>???</span>
+                    </div>
+                    <div class="field_display_quest_mid">
+                        Upgrade City
+                    </div>
+                    <div class="field_display_quest_down">
+                        Hello, City
+                    </div>
+                </button>
+
+                <button id="quest_upgrade_plantation" 
+                class="button_quest dash" onclick="Quest_Upgrade_Plantation()">
+                    <div class="field_display_quest_up">
+                        <span>Quest : </span><span>???</span>
+                    </div>
+                    <div class="field_display_quest_mid">
+                        Upgrade Plantation
+                    </div>
+                    <div class="field_display_quest_down">
+                        Hello, Plantation
+                    </div>
+                </button>
+
+                <button id="quest_upgrade_field" class="button_quest dash" onclick="Quest_Upgrade_Field()">
+                    <div class="field_display_quest_up">
+                        <span>Quest : </span><span>???</span>
+                    </div>
+                    <div class="field_display_quest_mid">
+                        Upgrade Field
+                    </div>
+                    <div class="field_display_quest_down">
+                        Hello, Field
+                    </div>
+                </button>
+
             </div>
         </div>
         <div id="field_show">
@@ -122,7 +172,7 @@
             
             <div id="field_rocket" class="dash">
                 <h3>Rocket</h3>
-                <div><em id="percent_rocket"></em>%</div>
+                <div><em id="percent_rocket"></em>% <em id="percent_extra"></em></div>
                 <hr width="100%" />
                 <button onclick="LaunchRocket()">로켓 발사</button>
             </div>
