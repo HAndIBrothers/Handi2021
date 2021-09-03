@@ -57,6 +57,10 @@ button:hover {
   width: 206px;
   height: 200px;
 }
+#field_compound > div {
+  display: flex;
+  flex-direction: row;
+}
 
 #field_input {
   display: flex;
@@ -99,12 +103,15 @@ button:hover {
 .button_comp {
   margin-left: 5px;
   margin-right: 5px;
-  height: 25px;
+  width: 200px;
+  height: 30px;
+  font-size: 10px;
 }
 
 .field_input_item {
   display: flex;
   flex-direction: row;
+  font-size: 12px;
 }
 
 .field_input_item > button,
@@ -190,12 +197,15 @@ span {
   flex-direction: column;
   text-align: center;
   width: 256px;
-  background-color: sienna;
 }
 
 .button_quest {
   margin: 0px auto;
   margin-top: 10px;
   width: 240px;
-  background-color: red;
+}
+
+#field_down_mid {
+  display: flex;
+  flex-direction: row;
 }

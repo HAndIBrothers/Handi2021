@@ -231,13 +231,13 @@ function GoToCity() {
     BUTTON_Field.style.backgroundColor = "#cccc00";
     this.WaitAndDo(eArea.city, () => {
 
-        var metal = this.GetRandom(1, 3);
+        var metal = this.GetRandom(dCity[iLevel_City].min, dCity[iLevel_City].max);
         AddItem(eItem.metal, metal);
         
-        var glass = this.GetRandom(1, 3);
+        var glass = this.GetRandom(dCity[iLevel_City].min, dCity[iLevel_City].max);
         AddItem(eItem.glass, glass);
 
-        var plastic = this.GetRandom(1, 3);
+        var plastic = this.GetRandom(dCity[iLevel_City].min, dCity[iLevel_City].max);
         AddItem(eItem.plastic, plastic);
     
         queue_log.enqueue("From City : Metal : " + metal 
@@ -288,7 +288,7 @@ function GoToField() {
     this.WaitAndDo(eArea.field, () => {
     
         // :: Carrot
-        var carrot = this.GetRandom(1, 3);
+        var carrot = this.GetRandom(dField[iLevel_Field].min, dField[iLevel_Field].max);
         AddItem(eItem.carrot, carrot);
     
         queue_log.enqueue("From Field : Carrot : " + carrot);
@@ -494,19 +494,6 @@ function AddCompound(eType, addValue) {
     UpdateCompound(eType);
 }
 function UpdateCompound(eType) {
-    var TEXT_Field;
-    switch(eType) {
-        case eCompound.core:
-            TEXT_Field = document.getElementById(pCompound.core);
-            break;
-        case eCompound.parts:
-            TEXT_Field = document.getElementById(pCompound.parts);
-            break;
-        case eCompound.fuel:
-            TEXT_Field = document.getElementById(pCompound.fuel);
-            break;
-    }
-    TEXT_Field.innerHTML = this.GetCompound(eType);
 }
 //#endregion
 
@@ -567,7 +554,7 @@ function UpdateInput(eType) {
             TEXT_Field = document.getElementById(pInput.fuel);
             break;
     }
-    TEXT_Field.innerHTML = this.GetInput(eType);
+    TEXT_Field.innerHTML = this.GetInput(eType) + "/" + this.GetCompound(eType);
 }
 //#endregion
 
@@ -757,11 +744,13 @@ function LaunchRocket() {
 
     queue_log.enqueue("Rocket Launched : " + (this.result_rocket ? "발사 성공" : "발사 실패"));
     UpdateText_Log();
+
+    console.log("ddd");
 }
 function UpdateText_LaunchRocket() {
-    var TEXT_Rocket = document.getElementById('result_rocket');
-    TEXT_Rocket.innerHTML
-    = this.result_rocket ? "발사 성공" : "발사 실패";
+    // var TEXT_Rocket = document.getElementById('result_rocket');
+    // TEXT_Rocket.innerHTML
+    // = this.result_rocket ? "발사 성공" : "발사 실패";
 }
 // #endregion
 
