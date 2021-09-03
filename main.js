@@ -628,11 +628,16 @@ function UpdateText_Log() {
 
 function moveRabbit() {
     let rabbits = document.querySelector('.field_image_bottom');
-    // let rabbitsAlign = rabbits.style.justifyContent.value;
-    console.log(rabbits)
-    // let timerId = setInterval(() => {
-    //     rabbitsAlign = rabbitsAlign == "center" ? "space-between" : "center";
-    // }, 1000);
+    let check = true;
+    let timerId = setInterval(() => {
+        if(check) {
+            rabbits.style.justifyContent= "space-evenly";
+            check = false;
+        } else {
+            rabbits.style.justifyContent= "center";
+            check = true;
+        }
+    }, 1000);
 }
 
 
