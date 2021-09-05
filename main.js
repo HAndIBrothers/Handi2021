@@ -1068,3 +1068,17 @@ function GetPercent() {
     }
     return note;
 }
+
+// :: success : 1, fail : -1, wait : 0
+function SetLaunchMessage(status, msg) {
+    switch(status) {
+        case -1:
+            break;
+        case 0:
+            break;
+        case 1:
+            break;
+    }
+}
+
+export { SetLaunchMessage };
