@@ -1061,3 +1061,10 @@ function Quest_Upgrade_Plantation() {
     UpdateStatus_QuestPlantation();
 }
 //#endregion
+
+function GetPercent() {
+    var note = {
+        percent: percent_rocket
+    }
+    return note;
+}
