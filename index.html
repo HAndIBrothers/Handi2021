@@ -59,29 +59,6 @@
             </div>
 
             <div id="field_display_right" class="dash">
-                <button id="quest_mother" class="button_quest dash" onclick="Quest_Mother()">
-                    <div class="field_display_quest_up">
-                        Compound 3 Items
-                    </div>
-                    <div class="field_display_quest_mid">
-                        Mother's Help
-                    </div>
-                    <div class="field_display_quest_down">
-                        Hello, Mom
-                    </div>
-                </button>
-
-                <button id="quest_father" class="button_quest dash" onclick="Quest_Father()">
-                    <div class="field_display_quest_up">
-                        Rocket was returned 3 times
-                    </div>
-                    <div class="field_display_quest_mid">
-                        Father's Help
-                    </div>
-                    <div class="field_display_quest_down">
-                        Hello, Pop
-                    </div>
-                </button>
 
                 <button id="quest_upgrade_city" class="button_quest dash" onclick="Quest_Upgrade_City()">
                     <div class="field_display_quest_up">
@@ -120,6 +97,29 @@
                     </div>
                 </button>
 
+                <button id="quest_mother" class="button_quest dash" onclick="Quest_Mother()">
+                    <div class="field_display_quest_up">
+                        Compound 3 Items
+                    </div>
+                    <div class="field_display_quest_mid">
+                        Mother's Help
+                    </div>
+                    <div class="field_display_quest_down">
+                        Hello, Mom
+                    </div>
+                </button>
+
+                <button id="quest_father" class="button_quest dash" onclick="Quest_Father()">
+                    <div class="field_display_quest_up">
+                        Rocket was returned 3 times
+                    </div>
+                    <div class="field_display_quest_mid">
+                        Father's Help
+                    </div>
+                    <div class="field_display_quest_down">
+                        Hello, Pop
+                    </div>
+                </button>
             </div>
         </div>
         <div id="field_show">
@@ -171,7 +171,7 @@
             
             <div id="field_rocket" class="dash">
                 <h3>Rocket</h3>
-                <div><em id="percent_rocket"></em>% <em id="percent_extra"></em></div>
+                <div><span id="percent_rocket"></span>% <em id="percent_extra"></em></div>
                 <hr width="100%" />
                 <button id="button_launch_rocket" onclick="launch_rocket();">Launch Rocket</button>
             </div>
