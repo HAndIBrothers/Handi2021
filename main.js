@@ -56,6 +56,7 @@ function Open() {
     // :: Reset : Percent
     this.percent_rocket = 0;
     this.iExtraPercent = 0;
+    count_return_rocket = 0;
 
     // :: Reset : Level
     this.iLevel_City = 0;
@@ -74,11 +75,12 @@ function Open() {
     SetMouseOver();
 
     // :: UI
-    this.UpdateUI();
+    UpdateUI();
     UpdateText_Compound();
     UpdateText_PlantationEa();
     UpdateText_CityEa();
     UpdateText_FieldEa();
+    UpdateStatus_BuildRocket();
 }
 // #endregion
 
@@ -93,30 +95,20 @@ function ShowRabbits() {
 //#endregion
 
 //#region MouseOver
+var cColor = {
+    work : "#FC5130",
+    can : "#1A2656",
+    cant : "#000000"
+}
 function SetMouseOver() {
-    var BUTTON_City = document.getElementById("button_city");
-    BUTTON_City.addEventListener("mouseover", () => {
-        BUTTON_City.style.backgroundColor = "#808080";
-    });
-    BUTTON_City.addEventListener("mouseleave", () => {
-        BUTTON_City.style.backgroundColor = "#000000";
-    });
+    var BUTTON_Field_Plantation = document.getElementById("button_city");
+    BUTTON_Field_Plantation.style.backgroundColor = cColor.can;
 
-    var BUTTON_Plantation = document.getElementById("button_plantation");
-    BUTTON_Plantation.addEventListener("mouseover", () => {
-        BUTTON_Plantation.style.backgroundColor = "#808080";
-    });
-    BUTTON_Plantation.addEventListener("mouseleave", () => {
-        BUTTON_Plantation.style.backgroundColor = "#000000";
-    });
+    var BUTTON_Field_Plantation = document.getElementById("button_plantation");
+    BUTTON_Field_Plantation.style.backgroundColor = cColor.can;
 
-    var BUTTON_Field = document.getElementById("button_field");
-    BUTTON_Field.addEventListener("mouseover", () => {
-        BUTTON_Field.style.backgroundColor = "#808080";
-    });
-    BUTTON_Field.addEventListener("mouseleave", () => {
-        BUTTON_Field.style.backgroundColor = "#000000";
-    });
+    var BUTTON_Field_Plantation = document.getElementById("button_field");
+    BUTTON_Field_Plantation.style.backgroundColor = cColor.can;
 }
 //#endregion
 
@@ -204,7 +196,7 @@ function GoToPlantation() {
     // :: Metal
     var BUTTON_Field = document.getElementById("button_plantation");
     BUTTON_Field.disabled = true;
-    BUTTON_Field.style.backgroundColor = "#cccc00";
+    BUTTON_Field.style.backgroundColor = cColor.work;
     this.WaitAndDo(eArea.plantation, () => {
 
         // :: Rubber
@@ -214,7 +206,7 @@ function GoToPlantation() {
         queue_log.enqueue("From Plantation : Rubber : " + rubber);
         UpdateText_Log();
 
-        BUTTON_Field.style.backgroundColor = "#000000";
+        BUTTON_Field.style.backgroundColor = cColor.can;
         BUTTON_Field.disabled = false;
 
         iCurRabbits.working -= 1;
@@ -274,7 +266,7 @@ function GoToCity() {
     // :: Plastic
     var BUTTON_Field = document.getElementById("button_city");
     BUTTON_Field.disabled = true;
-    BUTTON_Field.style.backgroundColor = "#cccc00";
+    BUTTON_Field.style.backgroundColor = cColor.work;
     this.WaitAndDo(eArea.city, () => {
 
         var metal = this.GetRandom(dCity[iLevel_City].min, dCity[iLevel_City].max);
@@ -290,7 +282,7 @@ function GoToCity() {
         + " / Glass : " + glass + " / Plastic : " + plastic);
         UpdateText_Log();
 
-        BUTTON_Field.style.backgroundColor = "#000000";
+        BUTTON_Field.style.backgroundColor = cColor.can;
         BUTTON_Field.disabled = false;
 
         iCurRabbits.working -= 1;
@@ -350,7 +342,7 @@ function GoToField() {
     // :: Glass
     var BUTTON_Field = document.getElementById("button_field");
     BUTTON_Field.disabled = true;
-    BUTTON_Field.style.backgroundColor = "#cccc00";
+    BUTTON_Field.style.backgroundColor = cColor.work;
     this.WaitAndDo(eArea.field, () => {
     
         // :: Carrot
@@ -360,7 +352,7 @@ function GoToField() {
         queue_log.enqueue("From Field : Carrot : " + carrot);
         UpdateText_Log();
 
-        BUTTON_Field.style.backgroundColor = "#000000";
+        BUTTON_Field.style.backgroundColor = cColor.can;
         BUTTON_Field.disabled = false;
 
         iCurRabbits.working -= 1;
@@ -631,6 +623,7 @@ function UpdateInput(eType) {
             break;
     }
     TEXT_Field.innerHTML = this.GetInput(eType) + "/" + this.GetCompound(eType);
+    UpdateStatus_BuildRocket();
 }
 //#endregion
 
@@ -664,9 +657,9 @@ function UpdateText_CompoundSteel() {
     = "Metal " + Item.metal + "/15" + " : Plastic " + Item.plastic + "/20";
 
     if(Item.metal >= 15 && Item.plastic >= 20)
-        TEXT_Field.style.backgroundColor = "#fd87db";
+        TEXT_Field.style.backgroundColor = cColor.can;
     else
-        TEXT_Field.style.backgroundColor = "#000000";
+        TEXT_Field.style.backgroundColor = cColor.cant;
 }
 // #endregion
 
@@ -709,9 +702,9 @@ function UpdateText_CompoundFiber() {
     if(Item.glass >= 5
         && Item.rubber >= 10
         && Item.metal >= 5)
-        TEXT_Field.style.backgroundColor = "#fd87db";
+        TEXT_Field.style.backgroundColor = cColor.can;
     else
-        TEXT_Field.style.backgroundColor = "#000000";
+        TEXT_Field.style.backgroundColor = cColor.cant;
 }
 // #endregion
 
@@ -740,9 +733,9 @@ function UpdateText_CompoundFuel() {
     = "Carrot " + Item.carrot + "/" + "10";
 
     if(Item.carrot >= 10)
-        TEXT_Field.style.backgroundColor = "#fd87db";
+        TEXT_Field.style.backgroundColor = cColor.can;
     else
-        TEXT_Field.style.backgroundColor = "#000000";
+        TEXT_Field.style.backgroundColor = cColor.cant;
 }
 // #endregion
 
@@ -766,6 +759,16 @@ var cNeed = {
     parts : 20,
     fuel : 15
 }
+function UpdateStatus_BuildRocket() {
+    if(Input.core <= 0
+        || Input.parts <= 0
+        || Input.fuel <= 0)
+    {
+        document.getElementById("button_build_rocket").style.backgroundColor = cColor.cant;
+        return;
+    }
+    document.getElementById("button_build_rocket").style.backgroundColor = cColor.can;
+}
 function BuildRocket() {
     if(Input.core <= 0
         || Input.parts <= 0
@@ -773,23 +776,39 @@ function BuildRocket() {
         return;
 
     // :: 여기 하는 중
-    var coreDif = (Input.core / cNeed.core) * 100;
-    var partsDif = (Input.parts / cNeed.parts) * 100;
-    var fuelDif = (Input.fuel / cNeed.fuel) * 100;
-    this.percent_rocket = (coreDif + partsDif + fuelDif) / 3;
-    this.percent_rocket = parseInt(this.percent_rocket);
+    var checkCore = Input.core > cNeed.core ? cNeed.core - (Input.core - cNeed.core) : Input.core;
+    var coreDif = (checkCore / cNeed.core) * 100;
+    if(coreDif <= 0) {
+        coreDif = 0;
+    }
+
+    var checkParts = Input.parts > cNeed.parts ? cNeed.parts - (Input.parts - cNeed.parts) : Input.parts;
+    var partsDif = (checkCore / cNeed.parts) * 100;
+    if(partsDif <= 0) {
+        partsDif = 0;
+    }
+
+    var checkFuel = Input.fuel > cNeed.fuel ? cNeed.fuel - (Input.fuel - cNeed.fuel) : Input.fuel;
+    var fuelDif = (checkFuel / cNeed.fuel) * 100;
+    if(fuelDif <= 0) {
+        fuelDif = 0;
+    }
+
+    percent_rocket = (coreDif + partsDif + fuelDif) / 3;
+    percent_rocket = parseInt(percent_rocket);
     
-    this.UpdatePercent_Rocket();
+    UpdatePercent_Rocket();
     
     AddCompound(eCompound.core, -Input.core);
     AddCompound(eCompound.parts, -Input.parts);
     AddCompound(eCompound.fuel, -Input.fuel);
-    this.ResetInput();
+    ResetInput();
 
     queue_log.enqueue("Rocket Built(" + percent_rocket + "%)");
     
     UpdateText_Log();
     UpdateText_Compound();
+    UpdateStatus_LaunchRocket();
 }
 function UpdatePercent_Rocket() {
     var TEXT_Rocket = document.getElementById('percent_rocket');
@@ -805,10 +824,19 @@ function UpdatePercent_Rocket() {
 function ResetPercent_Rocket() {
     percent_rocket = 0;
     UpdatePercent_Rocket();
+    UpdateStatus_LaunchRocket();
 }
 // #endregion
 
 // #region Launch Rocket
+function UpdateStatus_LaunchRocket() {
+    if(percent_rocket <= 0)
+    {
+        document.getElementById("button_launch_rocket").style.backgroundColor = cColor.cant;
+        return;
+    }
+    document.getElementById("button_launch_rocket").style.backgroundColor = cColor.can;
+}
 var result_rocket = false;
 var count_return_rocket = 0;
 function LaunchRocket() {
@@ -898,6 +926,7 @@ function UpdateText_Log() {
     }
     
     TEXT_Field.innerHTML = stringData;
+    UpdateStatus_Quest();
 }
 //#endregion
 
@@ -906,6 +935,8 @@ function UpdateStatus_Quest() {
     UpdateStatus_QuestCity();
     UpdateStatus_QuestField();
     UpdateStatus_QuestPlantation();
+    UpdateStatus_QuestMother();
+    UpdateStatus_QuestFather();
 }
 function UpdateStatus_QuestCity() {
     var field = document.querySelector("#quest_upgrade_city");
@@ -917,9 +948,18 @@ function UpdateStatus_QuestCity() {
             + " | Parts x" + dCity[iLevel_City].Need.parts
             + " | Fuel x" + dCity[iLevel_City].Need.fuel;
         field_mission.innerHTML = "Upgrade City Road Lv " + (iLevel_City + 1);
+
+        if(Compound.core >= dCity[iLevel_City].Need.core
+            && Compound.parts >= dCity[iLevel_City].Need.parts
+            && Compound.fuel >= dCity[iLevel_City].Need.fuel) {
+            field.style.backgroundColor = cColor.can;
+        } else {
+            field.style.backgroundColor = cColor.cant;
+        }
+
     } else {
         field_need.innerHTML = "Complete!"
-        document.querySelector("#quest_upgrade_city").style.backgroundColor = "orange";
+        document.querySelector("#quest_upgrade_city").style.backgroundColor = cColor.work;
     }
 }
 function UpdateStatus_QuestPlantation() {
@@ -932,9 +972,18 @@ function UpdateStatus_QuestPlantation() {
             + " | Parts x" + dPlantation[iLevel_Plantation].Need.parts
             + " | Fuel x" + dPlantation[iLevel_Plantation].Need.fuel;
         field_mission.innerHTML = "Upgrade Plantation Lv " + (iLevel_Plantation + 1);
+
+        if(Compound.core >= dPlantation[iLevel_Plantation].Need.core
+            && Compound.parts >= dPlantation[iLevel_Plantation].Need.parts
+            && Compound.fuel >= dPlantation[iLevel_Plantation].Need.fuel) {
+            field.style.backgroundColor = cColor.can;
+        } else {
+            field.style.backgroundColor = cColor.cant;
+        }
+
     } else {
         field_need.innerHTML = "Complete!"
-        document.querySelector("#quest_upgrade_plantation").style.backgroundColor = "orange";
+        document.querySelector("#quest_upgrade_plantation").style.backgroundColor = cColor.work;
     }
 }
 function UpdateStatus_QuestField() {
@@ -947,13 +996,36 @@ function UpdateStatus_QuestField() {
             + " | Parts x" + dField[iLevel_Field].Need.parts
             + " | Fuel x" + dField[iLevel_Field].Need.fuel;
         field_mission.innerHTML = "Upgrade Field Lv " + (iLevel_Field + 1);
+
+        if(Compound.core >= dField[iLevel_Field].Need.core
+        && Compound.parts >= dField[iLevel_Field].Need.parts
+        && Compound.fuel >= dField[iLevel_Field].Need.fuel) {
+            field.style.backgroundColor = cColor.can;
+        } else {
+            field.style.backgroundColor = cColor.cant;
+        }
+
     } else {
         field_need.innerHTML = "Complete!"
-        document.querySelector("#quest_upgrade_field").style.backgroundColor = "orange";
+        document.querySelector("#quest_upgrade_field").style.backgroundColor = cColor.work;
     }
 }
+
+function UpdateStatus_QuestMother() {
+    var field = document.querySelector("#quest_mother");
+    if(iCurRabbits.together >= 3) {
+        return;
+    }
+
+    if(Compound.gather < 3) {
+        field.style.backgroundColor = cColor.cant;
+        return;
+    }
+
+    field.style.backgroundColor = cColor.can;
+}
 function Quest_Mother() {
-    if(iCurRabbits >= 3) {
+    if(iCurRabbits.together >= 3) {
         return;
     }
 
@@ -963,13 +1035,30 @@ function Quest_Mother() {
 
     iCurRabbits.together = 3;
     ShowRabbits();
-    document.getElementById("quest_mother").style.backgroundColor = "orange";
+    document.getElementById("quest_mother").style.backgroundColor = cColor.work;
 }
 
+function UpdateStatus_QuestFather() {
+    var field = document.querySelector("#quest_father");
+    if(iCurRabbits.together >= 4) {
+        return;
+    }
+
+    if(count_return_rocket < 3) {
+        field.style.backgroundColor = cColor.cant;
+        return;
+    }
+
+    field.style.backgroundColor = cColor.can;
+}
 var iExtraPercent;
 var iComeFather = false;
 function Quest_Father() {
     if(iExtraPercent >= 5) {
+        return;
+    }
+
+    if(count_return_rocket < 3) {
         return;
     }
 
@@ -983,7 +1072,7 @@ function Quest_Father() {
     iExtraPercent += 5;
     if(iExtraPercent >= 5) {
         iExtraPercent = 5;
-        document.getElementById("quest_father").style.backgroundColor = "orange";
+        document.getElementById("quest_father").style.backgroundColor = cColor.work;
     }
     UpdatePercent_Rocket();
 }
@@ -1061,9 +1150,4 @@ function GetPercent() {
         percent: percent_rocket
     }
     return note;
-}
-
-// :: success : 1, fail : -1, wait : 0
-function SetLaunchMessage(msg) {
-    
 }
