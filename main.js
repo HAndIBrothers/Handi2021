@@ -81,6 +81,117 @@ function Open() {
     UpdateText_CityEa();
     UpdateText_FieldEa();
     UpdateStatus_BuildRocket();
+
+    DoFire("effect_fire_3");
+    DoFire("effect_fire_2");
+    DoFire("effect_fire_1");
+}
+function ShowScene_Launch(num) {
+    var scene_1 =
+`
+<pre id="scene_1">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+▲
+▲■▲
+■□■
+■□■
+■■■
+□□□
+■■■
+<em id="effect_fire_1" class="effect_fire">###</em>
+=======
+                </pre>
+`;
+    var scene_2 =
+`
+
+<pre id="scene_2">
+
+
+
+
+
+
+
+
+
+
+
+▲
+▲■▲
+■□■
+■□■
+■■■
+□□□
+<em id="effect_fire_2" class="effect_fire">###</em>
+
+                </pre>
+`;
+
+var scene_3 =
+`
+<pre id="scene_3">
+<em class="color_moon">=============================================
+========================================
+================================
+==================</em>
+
+
+
+
+▲
+▲■▲
+■□■
+■□■
+■■■
+□□□
+<em id="effect_fire_3" class="effect_fire">###</em>
+
+</pre>
+`;
+
+    var field = document.getElementById("field_display_center");
+    switch(num) {
+        case 1:
+            field.innerHTML = scene_1;
+            break;
+        case 2:
+            field.innerHTML = scene_2;
+            break;
+        case 3:
+            field.innerHTML = scene_3;
+            break;
+    }
+}
+function DoFire(text) {
+    var fire_check = true;
+    setInterval(() => {
+        if(fire_check) {
+            document.getElementById(text)
+            .innerHTML = "###";
+            fire_check = false;
+        } else {
+            document.getElementById(text)
+            .innerHTML = "***";
+            fire_check = true;
+        }
+    }, 1000);
 }
 // #endregion
 

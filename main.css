@@ -86,6 +86,16 @@ button:hover {
   height: 70px;
 }
 
+#field_display_center {
+  width: 510px;
+}
+.color_moon {
+  color: yellow;
+}
+.effect_fire {
+  color: red;
+}
+
 #field_story {
   display: flex;
   flex-direction: column;
