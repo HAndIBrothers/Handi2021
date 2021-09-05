@@ -803,8 +803,8 @@ function UpdatePercent_Rocket() {
     }
 }
 function ResetPercent_Rocket() {
-    this.percent_rocket = 0;
-    this.UpdatePercent_Rocket();
+    percent_rocket = 0;
+    UpdatePercent_Rocket();
 }
 // #endregion
 
@@ -832,15 +832,9 @@ function LaunchRocket() {
     }
     
     this.ResetPercent_Rocket();
-    this.UpdateText_LaunchRocket();
 
     queue_log.enqueue("Rocket Launched : " + (this.result_rocket ? "발사 성공" : "발사 실패"));
     UpdateText_Log();
-}
-function UpdateText_LaunchRocket() {
-    // var TEXT_Rocket = document.getElementById('result_rocket');
-    // TEXT_Rocket.innerHTML
-    // = this.result_rocket ? "발사 성공" : "발사 실패";
 }
 // #endregion
 
@@ -1070,15 +1064,6 @@ function GetPercent() {
 }
 
 // :: success : 1, fail : -1, wait : 0
-function SetLaunchMessage(status, msg) {
-    switch(status) {
-        case -1:
-            break;
-        case 0:
-            break;
-        case 1:
-            break;
-    }
+function SetLaunchMessage(msg) {
+    
 }
-
-export { SetLaunchMessage };
