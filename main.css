@@ -96,6 +96,12 @@ button:hover {
   color: red;
 }
 
+#scene_ending {
+  text-align: center;
+  width: 1024px;
+  height: 643px;
+}
+
 #field_story {
   display: flex;
   flex-direction: column;
