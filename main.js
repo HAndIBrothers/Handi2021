@@ -195,6 +195,9 @@ function DoFire(text) {
         }
     }, 1000);
 }
+function OffFire() {
+    clearInterval(interval_fire);
+}
 // #endregion
 
 //#region Rabbits
@@ -647,6 +650,7 @@ function GetCompound(eType) {
             return Compound.fuel;
     }
 }
+var isFirstCompound = false;
 function AddCompound(eType, addValue) {
     switch(eType) {
         case eCompound.core:
@@ -670,6 +674,9 @@ function AddCompound(eType, addValue) {
         if(Compound.gather >= 2
             && iCurRabbits.together < 3) {
             document.getElementById("quest_mother").style.display = "";
+        }
+        if(!isFirstCompound) {
+            
         }
     }
     UpdateInput(eType);
