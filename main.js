@@ -81,10 +81,6 @@ function Open() {
     UpdateText_CityEa();
     UpdateText_FieldEa();
     UpdateStatus_BuildRocket();
-
-    DoFire("effect_fire_3");
-    DoFire("effect_fire_2");
-    DoFire("effect_fire_1");
 }
 function ShowScene_Launch(num) {
     var scene_1 =
@@ -166,22 +162,28 @@ var scene_3 =
 </pre>
 `;
 
+
     var field = document.getElementById("field_display_center");
     switch(num) {
         case 1:
             field.innerHTML = scene_1;
+            DoFire("effect_fire_1");
             break;
         case 2:
             field.innerHTML = scene_2;
+            DoFire("effect_fire_2");
             break;
         case 3:
             field.innerHTML = scene_3;
+            DoFire("effect_fire_3");
             break;
     }
 }
+var interval_fire;
 function DoFire(text) {
+    clearInterval(interval_fire);
     var fire_check = true;
-    setInterval(() => {
+    interval_fire = setInterval(() => {
         if(fire_check) {
             document.getElementById(text)
             .innerHTML = "###";
