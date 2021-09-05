@@ -3,9 +3,6 @@
     // scene02_ingame()
 }
 
-// queue_log.enqueue("Rocket Launched : " + (this.result_rocket ? "발사 성공" : "발사 실패"));
-// UpdateText_Log();
-
 function scene01_opening() {
     let fieldCenter = document.querySelector('#field_display_center')
     fieldCenter.innerHTML = `
