@@ -1,6 +1,5 @@
 ﻿function openScene() {
     scene01_opening();
-    // scene02_ingame()
 }
 
 var scene01_timer;
@@ -57,6 +56,7 @@ function off_scene01() {
 
 var scene02_timer;
 function scene02_ingame() {
+    off_scene01()
     let fieldCenter = document.querySelector('#field_display_center')
     let rabbit_count = 1;
     fieldCenter.innerHTML = `
