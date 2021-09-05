@@ -767,6 +767,11 @@ var cNeed = {
     fuel : 15
 }
 function BuildRocket() {
+    if(Input.core <= 0
+        || Input.parts <= 0
+        || Input.fuel <= 0)
+        return;
+
     // :: 여기 하는 중
     var coreDif = (Input.core / cNeed.core) * 100;
     var partsDif = (Input.parts / cNeed.parts) * 100;
@@ -807,6 +812,9 @@ function ResetPercent_Rocket() {
 var result_rocket = false;
 var count_return_rocket = 0;
 function LaunchRocket() {
+    if(percent_rocket <= 0)
+        return;
+
     var rand = Math.floor(Math.random() * 100) + 1;
     
     if(rand <= this.percent_rocket)
