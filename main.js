@@ -263,7 +263,7 @@ function ShowRabbits() {
 
 //#region MouseOver
 var cColor = {
-    work : "#FC5130",
+    work : "#808080",
     can : "#1A2656",
     cant : "#000000"
 }
@@ -552,11 +552,11 @@ function WaitAndDo(rArea, Do) {
 function GetSec(rArea) {
     switch(rArea) {
         case eArea.field:
-            return 3;
+            return 2;
         case eArea.plantation:
-            return 3;
+            return 2;
         case eArea.city:
-            return 3;
+            return 2;
     }
 }
 function ResetSec(rArea) {
