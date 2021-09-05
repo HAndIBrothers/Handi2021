@@ -1,0 +1,40 @@
+﻿#scene01_container {
+  font-family: "Courier New", Courier, monospace;
+  width: 468px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#scene01_moon {
+  width: 110px;
+  height: 110px;
+  border-radius: 55px;
+  background: yellow;
+}
+
+.scene01_field_bottom {
+  display: flex;
+  width: 468px;
+  justify-content: center;
+}
+
+.scene01_rabbit,
+.scene02_spaceship {
+  white-space: pre;
+}
+
+#scene02_container {
+  font-family: "Courier New", Courier, monospace;
+  width: 468px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.scene02_rabbicon {
+  position: relative;
+}
