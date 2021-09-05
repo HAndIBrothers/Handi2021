@@ -190,6 +190,27 @@ span {
 #field_display_center {
   font-family: "Courier New", Courier, monospace;
   width: 468px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#moon {
+  width: 110px;
+  height: 110px;
+  border-radius: 55px;
+  background: yellow;
+}
+
+.field_image_bottom {
+  display: flex;
+  width: 468px;
+  justify-content: center;
+}
+
+.field_image_rabbit {
+  white-space: pre;
 }
 
 #field_display_right {
