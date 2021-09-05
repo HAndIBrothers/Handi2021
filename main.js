@@ -9,7 +9,8 @@ var Item = {
 var Compound = {
     core : 0,
     parts : 0,
-    fuel : 0
+    fuel : 0,
+    gather : 0
 }
 var Input = {
     core : 0,
@@ -60,6 +61,11 @@ function Open() {
     this.iLevel_City = 0;
     this.iLevel_Plantation = 0;
     this.iLevel_Field = 0;
+
+    // :: Reset : Quest
+    UpdateStatus_Quest();
+    document.getElementById("quest_mother").style.display = "none";
+    document.getElementById("quest_father").style.display = "none";
     
     // :: Log
     queue_log = new Queue();
@@ -154,19 +160,39 @@ var iLevel_Plantation;
 const dPlantation = {
     0 : {
         min : 1,
-        max : 3
+        max : 3,
+        Need : {
+            core : 2,
+            parts : 3,
+            fuel : 1
+        }
     },
     1 : {
         min : 2,
-        max : 6
+        max : 6,
+        Need : {
+            core : 4,
+            parts : 5,
+            fuel : 3
+        }
     },
     2 : {
         min : 3,
-        max : 12
+        max : 12,
+        Need : {
+            core : 6,
+            parts : 7,
+            fuel : 5
+        }
     },
     3 : {
         min : 6,
-        max : 24
+        max : 24,
+        Need : {
+            core : 9999,
+            parts : 9999,
+            fuel : 9999
+        }
     }
 }
 function GoToPlantation() {
@@ -203,19 +229,39 @@ var iLevel_City;
 const dCity = {
     0 : {
         min : 1,
-        max : 3
+        max : 3,
+        Need : {
+            core : 3,
+            parts : 1,
+            fuel : 2
+        }
     },
     1 : {
         min : 2,
-        max : 6
+        max : 6,
+        Need : {
+            core : 5,
+            parts : 3,
+            fuel : 4
+        }
     },
     2 : {
         min : 3,
-        max : 12
+        max : 12,
+        Need : {
+            core : 7,
+            parts : 5,
+            fuel : 6
+        }
     },
     3 : {
         min : 6,
-        max : 24
+        max : 24,
+        Need : {
+            core : 9999,
+            parts : 9999,
+            fuel : 9999
+        }
     }
 }
 function GoToCity() {
@@ -259,19 +305,39 @@ var iLevel_Field;
 const dField = {
     0 : {
         min : 1,
-        max : 3
+        max : 3,
+        Need : {
+            core : 1,
+            parts : 2,
+            fuel : 3
+        }
     },
     1 : {
         min : 2,
-        max : 6
+        max : 6,
+        Need : {
+            core : 3,
+            parts : 4,
+            fuel : 5
+        }
     },
     2 : {
         min : 3,
-        max : 12
+        max : 12,
+        Need : {
+            core : 5,
+            parts : 6,
+            fuel : 7
+        }
     },
     3 : {
         min : 6,
-        max : 24
+        max : 24,
+        Need : {
+            core : 9999,
+            parts : 9999,
+            fuel : 9999
+        }
     }
 }
 function GoToField() {
@@ -365,9 +431,6 @@ function UpdateUI() {
     this.UpdateItem(eItem.carrot);
     
     // :: Compound
-    UpdateCompound(eCompound.core);
-    UpdateCompound(eCompound.parts);
-    UpdateCompound(eCompound.fuel);
     
     // :: Input
     UpdateInput(eCompound.core);
@@ -483,15 +546,28 @@ function AddCompound(eType, addValue) {
     switch(eType) {
         case eCompound.core:
             Compound.core += addValue;
+            if(Compound.core < Input.core)
+                Input.core = Compound.core;
             break;
         case eCompound.parts:
             Compound.parts += addValue;
+            if(Compound.parts < Input.parts)
+                Input.parts = Compound.parts;
             break;
         case eCompound.fuel:
             Compound.fuel += addValue;
+            if(Compound.fuel < Input.fuel)
+                Input.fuel = Compound.fuel;
             break;
     }
-    UpdateCompound(eType);
+    if(addValue > 0) {
+        Compound.gather += addValue;
+        if(Compound.gather >= 2
+            && iCurRabbits.together < 3) {
+            document.getElementById("quest_mother").style.display = "";
+        }
+    }
+    UpdateInput(eType);
 }
 function UpdateCompound(eType) {
 }
@@ -572,8 +648,7 @@ function CompoundItem_Steel() {
     AddItem(eItem.plastic, -min * 20)
     AddCompound(eCompound.core, min);
     
-    if(Input.core === 0)
-        Input.core = Compound.core;
+    Input.core = Compound.core;
     
     UpdateInput(eCompound.core);
 
@@ -612,8 +687,8 @@ function CompoundItem_Fiber() {
     
     AddCompound(eCompound.parts, min);
     
-    if(Input.parts === 0)
-        Input.parts = Compound.parts;
+    
+    Input.parts = Compound.parts;
     
     UpdateInput(eCompound.parts);
 
@@ -650,8 +725,7 @@ function CompoundItem_Fuel() {
     AddItem(eItem.carrot, -treeCompNum * 10);
     AddCompound(eCompound.fuel, treeCompNum);
     
-    if(Input.fuel === 0)
-        Input.fuel = Compound.fuel;
+    Input.fuel = Compound.fuel;
     
     UpdateInput(eCompound.fuel);
 
@@ -731,21 +805,29 @@ function ResetPercent_Rocket() {
 
 // #region Launch Rocket
 var result_rocket = false;
+var count_return_rocket = 0;
 function LaunchRocket() {
     var rand = Math.floor(Math.random() * 100) + 1;
     
     if(rand <= this.percent_rocket)
         this.result_rocket = true;
-    else
+    else {
         this.result_rocket = false;
+        count_return_rocket += 1;
+        if(!iComeFather) {
+            if(count_return_rocket >= 1
+                && iCurRabbits.together == 3) {
+                document.querySelector("#quest_father").style.display = "";
+                iComeFather = true;
+            }
+        }
+    }
     
     this.ResetPercent_Rocket();
     this.UpdateText_LaunchRocket();
 
     queue_log.enqueue("Rocket Launched : " + (this.result_rocket ? "발사 성공" : "발사 실패"));
     UpdateText_Log();
-
-    console.log("ddd");
 }
 function UpdateText_LaunchRocket() {
     // var TEXT_Rocket = document.getElementById('result_rocket');
@@ -819,18 +901,76 @@ function UpdateText_Log() {
 
 //#region Quest
 function UpdateStatus_Quest() {
-
+    UpdateStatus_QuestCity();
+    UpdateStatus_QuestField();
+    UpdateStatus_QuestPlantation();
+}
+function UpdateStatus_QuestCity() {
+    var field = document.querySelector("#quest_upgrade_city");
+    var field_mission = field.querySelector(".field_display_quest_mid");
+    var field_need = field.querySelector(".field_display_quest_up");
+    if(iLevel_City < 3) {
+        field_need.innerHTML = "Use " 
+            + "Core x" + dCity[iLevel_City].Need.core
+            + " | Parts x" + dCity[iLevel_City].Need.parts
+            + " | Fuel x" + dCity[iLevel_City].Need.fuel;
+        field_mission.innerHTML = "Upgrade City Road Lv " + (iLevel_City + 1);
+    } else {
+        field_need.innerHTML = "Complete!"
+        document.querySelector("#quest_upgrade_city").style.backgroundColor = "orange";
+    }
+}
+function UpdateStatus_QuestPlantation() {
+    var field = document.querySelector("#quest_upgrade_plantation");
+    var field_mission = field.querySelector(".field_display_quest_mid");
+    var field_need = field.querySelector(".field_display_quest_up");
+    if(iLevel_Plantation < 3) {
+        field_need.innerHTML = "Use " 
+            + "Core x" + dPlantation[iLevel_Plantation].Need.core
+            + " | Parts x" + dPlantation[iLevel_Plantation].Need.parts
+            + " | Fuel x" + dPlantation[iLevel_Plantation].Need.fuel;
+        field_mission.innerHTML = "Upgrade Plantation Lv " + (iLevel_Plantation + 1);
+    } else {
+        field_need.innerHTML = "Complete!"
+        document.querySelector("#quest_upgrade_plantation").style.backgroundColor = "orange";
+    }
+}
+function UpdateStatus_QuestField() {
+    var field = document.querySelector("#quest_upgrade_field");
+    var field_mission = field.querySelector(".field_display_quest_mid");
+    var field_need = field.querySelector(".field_display_quest_up");
+    if(iLevel_Field < 3) {
+        field_need.innerHTML = "Use " 
+            + "Core x" + dField[iLevel_Field].Need.core
+            + " | Parts x" + dField[iLevel_Field].Need.parts
+            + " | Fuel x" + dField[iLevel_Field].Need.fuel;
+        field_mission.innerHTML = "Upgrade Field Lv " + (iLevel_Field + 1);
+    } else {
+        field_need.innerHTML = "Complete!"
+        document.querySelector("#quest_upgrade_field").style.backgroundColor = "orange";
+    }
 }
 function Quest_Mother() {
-    if(iCurRabbits.together == 2) {
-        iCurRabbits.together = 3;
-        ShowRabbits();
+    if(iCurRabbits >= 3) {
+        return;
     }
-    document.getElementById("quest_mother").style.display = "none";
+
+    if(Compound.gather < 3) {
+        return;
+    }
+
+    iCurRabbits.together = 3;
+    ShowRabbits();
+    document.getElementById("quest_mother").style.backgroundColor = "orange";
 }
 
 var iExtraPercent;
+var iComeFather = false;
 function Quest_Father() {
+    if(iExtraPercent >= 5) {
+        return;
+    }
+
     if(iCurRabbits.together == 3) {
         iCurRabbits.together = 4;
         ShowRabbits();
@@ -838,35 +978,78 @@ function Quest_Father() {
         return;
     }
 
-    iExtraPercent += 1;
+    iExtraPercent += 5;
     if(iExtraPercent >= 5) {
         iExtraPercent = 5;
-        document.getElementById("quest_father").style.display = "none";
+        document.getElementById("quest_father").style.backgroundColor = "orange";
     }
     UpdatePercent_Rocket();
 }
 function Quest_Upgrade_City() {
+    if(iLevel_City >= 3) {
+        return;
+    }
+
+    if(dCity[iLevel_City].Need.core > Compound.core
+    || dCity[iLevel_City].Need.parts > Compound.parts
+    || dCity[iLevel_City].Need.fuel > Compound.fuel) {
+        return;
+    }
+    
+    AddCompound(eCompound.core, -dCity[iLevel_City].Need.core);
+    AddCompound(eCompound.parts, -dCity[iLevel_City].Need.parts);
+    AddCompound(eCompound.fuel, -dCity[iLevel_City].Need.fuel);
+
     iLevel_City += 1;
     if(iLevel_City >= 3) {
         iLevel_City = 3;
-        document.getElementById("quest_upgrade_city").style.display = "none";
     }
+
     UpdateText_CityEa();
+    UpdateStatus_QuestCity();
 }
 function Quest_Upgrade_Field() {
+    if(iLevel_Field >= 3) {
+        return;
+    }
+
+    if(dField[iLevel_Field].Need.core > Compound.core
+    || dField[iLevel_Field].Need.parts > Compound.parts
+    || dField[iLevel_Field].Need.fuel > Compound.fuel) {
+        return;
+    }
+    
+    AddCompound(eCompound.core, -dField[iLevel_Field].Need.core);
+    AddCompound(eCompound.parts, -dField[iLevel_Field].Need.parts);
+    AddCompound(eCompound.fuel, -dField[iLevel_Field].Need.fuel);
+
     iLevel_Field += 1;
     if(iLevel_Field >= 3) {
         iLevel_Field = 3;
-        document.getElementById("quest_upgrade_field").style.display = "none";
     }
     UpdateText_FieldEa();
+    UpdateStatus_QuestField();
 }
 function Quest_Upgrade_Plantation() {
+    if(iLevel_Plantation >= 3) {
+        return;
+    }
+
+    if(dPlantation[iLevel_Plantation].Need.core > Compound.core
+    || dPlantation[iLevel_Plantation].Need.parts > Compound.parts
+    || dPlantation[iLevel_Plantation].Need.fuel > Compound.fuel) {
+        return;
+    }
+    
+    AddCompound(eCompound.core, -dPlantation[iLevel_Plantation].Need.core);
+    AddCompound(eCompound.parts, -dPlantation[iLevel_Plantation].Need.parts);
+    AddCompound(eCompound.fuel, -dPlantation[iLevel_Plantation].Need.fuel);
+
     iLevel_Plantation += 1;
     if(iLevel_Plantation >= 3) {
         iLevel_Plantation = 3;
-        document.getElementById("quest_upgrade_plantation").style.display = "none";
     }
     UpdateText_PlantationEa();
+    UpdateStatus_QuestPlantation();
 }
 //#endregion
