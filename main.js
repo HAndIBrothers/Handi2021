@@ -263,7 +263,7 @@ function ShowRabbits() {
 
 //#region MouseOver
 var cColor = {
-    work : "#808080",
+    work : "#FC5130",
     can : "#1A2656",
     cant : "#000000"
 }
@@ -857,7 +857,7 @@ function CompoundItem_Fiber() {
     
     UpdateInput(eCompound.parts);
 
-    queue_log.enqueue("Glass x" + min * 5 + " / Rubber Tree x" + min * 10 
+    queue_log.enqueue("Glass x" + min * 5 + " / Rubber x" + min * 10 
     + " / Metal x" + min * 5
     + " => Fiber x" + min);
     
@@ -868,7 +868,7 @@ function UpdateText_CompoundFiber() {
     var TEXT_Field = document.getElementById(pCompoundButton.parts);
     TEXT_Field.innerHTML
     = "Glass " + Item.glass + "/5 | "
-    + "Rubber Tree " + Item.rubber + "/10 | "
+    + "Rubber " + Item.rubber + "/10 | "
     + "Metal " + Item.metal + "/5";
 
     if(Item.glass >= 5
@@ -1114,12 +1114,17 @@ function UpdateStatus_QuestCity() {
     var field = document.querySelector("#quest_upgrade_city");
     var field_mission = field.querySelector(".field_display_quest_mid");
     var field_need = field.querySelector(".field_display_quest_up");
+    var field_result = field.querySelector(".field_display_quest_down");
     if(iLevel_City < 3) {
         field_need.innerHTML = "Use " 
             + "Core x" + dCity[iLevel_City].Need.core
             + " | Parts x" + dCity[iLevel_City].Need.parts
             + " | Fuel x" + dCity[iLevel_City].Need.fuel;
         field_mission.innerHTML = "Upgrade City Road Lv " + (iLevel_City + 1);
+        field_result.innerHTML
+            = dCity[iLevel_City].min + "~" + dCity[iLevel_City].max + " ea"
+            + " → "
+            + dCity[iLevel_City + 1].min + "~" + dCity[iLevel_City + 1].max + " ea";
 
         if(Compound.core >= dCity[iLevel_City].Need.core
             && Compound.parts >= dCity[iLevel_City].Need.parts
@@ -1131,6 +1136,8 @@ function UpdateStatus_QuestCity() {
 
     } else {
         field_need.innerHTML = "Complete!"
+        field_result.innerHTML
+            = dCity[iLevel_City].min + "~" + dCity[iLevel_City].max;
         document.querySelector("#quest_upgrade_city").style.backgroundColor = cColor.work;
     }
 }
@@ -1138,12 +1145,17 @@ function UpdateStatus_QuestPlantation() {
     var field = document.querySelector("#quest_upgrade_plantation");
     var field_mission = field.querySelector(".field_display_quest_mid");
     var field_need = field.querySelector(".field_display_quest_up");
+    var field_result = field.querySelector(".field_display_quest_down");
     if(iLevel_Plantation < 3) {
         field_need.innerHTML = "Use " 
             + "Core x" + dPlantation[iLevel_Plantation].Need.core
             + " | Parts x" + dPlantation[iLevel_Plantation].Need.parts
             + " | Fuel x" + dPlantation[iLevel_Plantation].Need.fuel;
         field_mission.innerHTML = "Upgrade Plantation Lv " + (iLevel_Plantation + 1);
+        field_result.innerHTML
+            = dPlantation[iLevel_Plantation].min + "~" + dPlantation[iLevel_Plantation].max + " ea"
+            + " → "
+            + dPlantation[iLevel_Plantation + 1].min + "~" + dPlantation[iLevel_Plantation + 1].max + " ea";
 
         if(Compound.core >= dPlantation[iLevel_Plantation].Need.core
             && Compound.parts >= dPlantation[iLevel_Plantation].Need.parts
@@ -1155,6 +1167,8 @@ function UpdateStatus_QuestPlantation() {
 
     } else {
         field_need.innerHTML = "Complete!"
+        field_result.innerHTML
+            = dPlantation[iLevel_Plantation].min + "~" + dPlantation[iLevel_Plantation].max;
         document.querySelector("#quest_upgrade_plantation").style.backgroundColor = cColor.work;
     }
 }
@@ -1162,12 +1176,17 @@ function UpdateStatus_QuestField() {
     var field = document.querySelector("#quest_upgrade_field");
     var field_mission = field.querySelector(".field_display_quest_mid");
     var field_need = field.querySelector(".field_display_quest_up");
+    var field_result = field.querySelector(".field_display_quest_down");
     if(iLevel_Field < 3) {
         field_need.innerHTML = "Use " 
             + "Core x" + dField[iLevel_Field].Need.core
             + " | Parts x" + dField[iLevel_Field].Need.parts
             + " | Fuel x" + dField[iLevel_Field].Need.fuel;
         field_mission.innerHTML = "Upgrade Field Lv " + (iLevel_Field + 1);
+        field_result.innerHTML
+            = dField[iLevel_Field].min + "~" + dField[iLevel_Field].max + " ea"
+            + " → "
+            + dField[iLevel_Field + 1].min + "~" + dField[iLevel_Field + 1].max + " ea";
 
         if(Compound.core >= dField[iLevel_Field].Need.core
         && Compound.parts >= dField[iLevel_Field].Need.parts
@@ -1179,6 +1198,8 @@ function UpdateStatus_QuestField() {
 
     } else {
         field_need.innerHTML = "Complete!"
+        field_result.innerHTML
+            = dField[iLevel_Field].min + "~" + dField[iLevel_Field].max;
         document.querySelector("#quest_upgrade_field").style.backgroundColor = cColor.work;
     }
 }

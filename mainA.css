@@ -1,6 +1,5 @@
 .dash {
-  background-color: black;
-  border: 1px dashed white;
+  border: 1px solid lightblue;
 }
 
 body {
@@ -156,6 +155,7 @@ span {
 #field_display_left > button {
   display: flex;
   flex-direction: row;
+  border-radius: 20px;
   width: 280px;
   margin: 0 auto;
   margin-top: 10px;
@@ -213,9 +213,14 @@ span {
   width: 256px;
 }
 
+#button_launch_rocket {
+  background-color: #FC5130;
+}
+
 .button_quest {
   margin: 0px auto;
   margin-top: 10px;
+  border-radius: 10px;
   width: 240px;
 }
 
