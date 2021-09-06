@@ -15,6 +15,7 @@ let is_launch_progress = false;
 let launch_percent;
 function launch_rocket() {
     launch_percent = GetPercent().percent;
+    // launch_percent = 10
     if(launch_percent < 1) {
         return;
     }
@@ -59,7 +60,7 @@ function launch_result() {
     }
     queue_log.enqueue(rocket_result ?
         `${rocket_status[status_number]} SUCESSED!!!!!` :
-        `${rocket_status[status_number]} failed... That's okay, Let's go again`)
+        `${rocket_status[status_number]} FAILED.. It's Okay, We go again!`)
     UpdateText_Log()
 
     if(rocket_result) {
@@ -67,7 +68,7 @@ function launch_result() {
         if(status_number > 3) {
             OffFire()
             off_scene02()
-            queue_log.enqueue(`엔딩`)
+            ShowEnding()
         }
         else {
             rocket_countdown();
@@ -77,6 +78,16 @@ function launch_result() {
     else {
         status_number = 1;
         is_launch_progress = false
+        count_return_rocket += 1
+        if(!iComeFather) {
+            console.log(iComeFather, count_return_rocket, iCurRabbits)
+            if(count_return_rocket >= 1 && iCurRabbits.together == 3) {
+                console.log(document.querySelector("#quest_father"))
+                document.querySelector("#quest_father").style.display = "block";
+
+                iComeFather = true;
+            }
+        }
         ResetPercent_Rocket()
         OffFire()
         off_scene02()
