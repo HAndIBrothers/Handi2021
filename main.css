@@ -136,7 +136,7 @@ span {
   height: 30px;
 }
 .field_input_item > button {
-  background-color: #1A2656;
+  background-color: #1a2656;
 }
 
 #field_input > button {
@@ -160,6 +160,10 @@ span {
   margin: 0 auto;
   margin-top: 10px;
   height: 100px;
+}
+#field_display_left > h2 {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 .field_display_button_left {
   display: flex;

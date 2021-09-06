@@ -217,6 +217,7 @@ var scene_3 =
     var field = document.getElementById("field_display_center");
     switch(num) {
         case 1:
+            off_scene02();
             field.innerHTML = scene_1;
             DoFire("effect_fire_1");
             break;
