@@ -80,11 +80,8 @@ function launch_result() {
         is_launch_progress = false
         count_return_rocket += 1
         if(!iComeFather) {
-            console.log(iComeFather, count_return_rocket, iCurRabbits)
             if(count_return_rocket >= 1 && iCurRabbits.together == 3) {
-                console.log(document.querySelector("#quest_father"))
                 document.querySelector("#quest_father").style.display = "block";
-
                 iComeFather = true;
             }
         }
