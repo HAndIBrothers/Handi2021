@@ -21,7 +21,7 @@
         </div>
         <div id="field_display">
             <div id="field_display_left" class="dash">
-                <h2>Location</h2>
+                <h2>LOCATION</h2>
                 <button id="button_city" class="dash" onclick="GoToCity()">
                     <div class="field_display_button_left">City</div>
                     <div class="field_display_button_right">
@@ -111,10 +111,10 @@
                         Compound 3 Items
                     </div>
                     <div class="field_display_quest_mid">
-                        Mother's Help
+                        MOM'S CARE
                     </div>
                     <div class="field_display_quest_down">
-                        Hello, Mom
+                        Now, you can go all location together
                     </div>
                 </button>
 
@@ -123,10 +123,10 @@
                         Rocket was returned 3 times
                     </div>
                     <div class="field_display_quest_mid">
-                        Father's Help
+                        DAD'S TRUST
                     </div>
                     <div class="field_display_quest_down">
-                        Hello, Pop
+                        Moon Arrival Probability + 5%
                     </div>
                 </button>
             </div>
@@ -137,7 +137,7 @@
             
             <div id="field_down_mid" class="dash">
                 <div id="field_compound" class="">
-                    <h3>Compound</h3>
+                    <h3>COMPONENT</h3>
                     <div>
                         <button onclick="CompoundItem_Steel()" 
                         class="button_comp dash" id="button_comp_core">Spaceship Core</button>
@@ -158,7 +158,7 @@
                 </div>
                 
                 <div id="field_input" class="">
-                    <h3>Rocket Input</h3>
+                    <h3>COMBINATION</h3>
                     <div class="field_input_item">
                         <button onclick="AddInput(eCompound.core, -1)" class="dash">left</button>
                         <span>Core : <em id="input_core"></em></span>
@@ -174,15 +174,15 @@
                         <span>Fuel : <em id="input_fuel"></em></span>
                         <button onclick="AddInput(eCompound.fuel, 1)" class="dash">right</button>
                     </div>
-                    <button id="button_build_rocket" onclick="BuildRocket()">Build</button>
+                    <button id="button_build_rocket" onclick="BuildRocket()">BUILD ROCKET</button>
                 </div>
             </div>
             
             <div id="field_rocket" class="dash">
-                <h3>Rocket</h3>
+                <h3>MOON ARRIVAL PROBABILITY</h3>
                 <div><span id="percent_rocket"></span>% <em id="percent_extra"></em></div>
                 <hr width="100%" />
-                <button id="button_launch_rocket" onclick="launch_rocket();">Launch Rocket</button>
+                <button id="button_launch_rocket" onclick="launch_rocket();">LAUNCH</button>
             </div>
         </div>
         <script type ="text/javascript" src="main.js"></script>

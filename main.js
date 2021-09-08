@@ -371,7 +371,7 @@ function GoToPlantation() {
         var rubber = this.GetRandom(dPlantation[iLevel_Plantation].min, dPlantation[iLevel_Plantation].max);
         AddItem(eItem.rubber, rubber);
     
-        queue_log.enqueue("From Plantation : Rubber : " + rubber);
+        queue_log.enqueue("[Plantation] Rubber : " + rubber);
         UpdateText_Log();
 
         BUTTON_Field.style.backgroundColor = cColor.can;
@@ -446,7 +446,7 @@ function GoToCity() {
         var plastic = this.GetRandom(dCity[iLevel_City].min, dCity[iLevel_City].max);
         AddItem(eItem.plastic, plastic);
     
-        queue_log.enqueue("From City : Metal : " + metal 
+        queue_log.enqueue("[CITY] Metal : " + metal 
         + " / Glass : " + glass + " / Plastic : " + plastic);
         UpdateText_Log();
 
@@ -517,7 +517,7 @@ function GoToField() {
         var carrot = this.GetRandom(dField[iLevel_Field].min, dField[iLevel_Field].max);
         AddItem(eItem.carrot, carrot);
     
-        queue_log.enqueue("From Field : Carrot : " + carrot);
+        queue_log.enqueue("[FIELDS] Carrot : " + carrot);
         UpdateText_Log();
 
         BUTTON_Field.style.backgroundColor = cColor.can;
@@ -1291,7 +1291,7 @@ function Quest_Upgrade_City() {
     }
 
     UpdateText_CityEa();
-    UpdateStatus_QuestCity();
+    UpdateStatus_Quest();
 }
 function Quest_Upgrade_Field() {
     if(iLevel_Field >= 3) {
@@ -1313,7 +1313,7 @@ function Quest_Upgrade_Field() {
         iLevel_Field = 3;
     }
     UpdateText_FieldEa();
-    UpdateStatus_QuestField();
+    UpdateStatus_Quest();
 }
 function Quest_Upgrade_Plantation() {
     if(iLevel_Plantation >= 3) {
@@ -1335,7 +1335,7 @@ function Quest_Upgrade_Plantation() {
         iLevel_Plantation = 3;
     }
     UpdateText_PlantationEa();
-    UpdateStatus_QuestPlantation();
+    UpdateStatus_Quest();
 }
 //#endregion
 
