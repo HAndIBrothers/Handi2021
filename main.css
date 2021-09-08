@@ -54,7 +54,7 @@ button:hover {
   display: flex;
   flex-direction: column;
   text-align: center;
-  width: 218px;
+  width: 283px;
   height: 200px;
 }
 #field_compound > div {
@@ -78,8 +78,10 @@ button:hover {
   height: 200px;
 }
 #field_rocket > div {
-  height: 50px;
-  font-size: 40px;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  height: 30px;
+  font-size: 30px;
 }
 #field_rocket > button {
   margin: 10px;
@@ -103,10 +105,11 @@ button:hover {
 }
 
 #field_story {
+  font-size: 12px;
   display: flex;
   flex-direction: column;
   text-align: left;
-  width: 350px;
+  width: 285px;
   height: 200px;
 }
 
@@ -121,7 +124,7 @@ button:hover {
   margin-right: 5px;
   width: 200px;
   height: 30px;
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .field_input_item {
