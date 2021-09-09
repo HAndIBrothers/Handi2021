@@ -1,5 +1,6 @@
 ﻿#scene01_container {
-  font-family: "Courier New", Courier, monospace;
+  /* font-family: "Courier New", Courier, monospace; */
+  font-family: "system-ui";
   width: 468px;
   height: 100%;
   display: flex;
@@ -27,7 +28,8 @@
 }
 
 #scene02_container {
-  font-family: "Courier New", Courier, monospace;
+  /* font-family: "Courier New", Courier, monospace; */
+  font-family: "system-ui";
   width: 468px;
   height: 100%;
   display: flex;
