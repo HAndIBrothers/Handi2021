@@ -266,7 +266,8 @@ function ShowRabbits() {
 var cColor = {
     work : "#FC5130",
     can : "#1A2656",
-    cant : "#000000"
+    cant : "#000000",
+    complete : "#AA9102"
 }
 function SetMouseOver() {
     var BUTTON_Field_Plantation = document.getElementById("button_city");
@@ -818,8 +819,8 @@ function CompoundItem_Steel() {
     
     UpdateInput(eCompound.core);
 
-    queue_log.enqueue("Metal x" + metalCompNum * 15
-    + " / Plastic x" + plasticCompNum + " => Steel x" + metalCompNum);
+    queue_log.enqueue("<COMPONENT>\nMetal : " + metalCompNum * 15
+    + " / Plastic : " + plasticCompNum + " => Steel x" + metalCompNum);
     
     UpdateText_Log();
     UpdateText_Compound();
@@ -858,8 +859,8 @@ function CompoundItem_Fiber() {
     
     UpdateInput(eCompound.parts);
 
-    queue_log.enqueue("Glass x" + min * 5 + " / Rubber x" + min * 10 
-    + " / Metal x" + min * 5
+    queue_log.enqueue("<COMPONENT>\nGlass : " + min * 5 + " / Rubber : " + min * 10 
+    + " / Metal : " + min * 5
     + " => Fiber x" + min);
     
     UpdateText_Log();
@@ -895,7 +896,7 @@ function CompoundItem_Fuel() {
     
     UpdateInput(eCompound.fuel);
 
-    queue_log.enqueue("Carrot x" + treeCompNum * 10 + " => Fuel x" + treeCompNum);
+    queue_log.enqueue("<COMPONENT>\nCarrot : " + treeCompNum * 10 + " => Fuel x" + treeCompNum);
     
     UpdateText_Log();
     UpdateText_Compound();
@@ -977,9 +978,9 @@ function BuildRocket() {
     AddCompound(eCompound.fuel, -Input.fuel);
     ResetInput();
 
-    queue_log.enqueue("Rocket Built(" + percent_rocket + "%)");
-    
+    queue_log.enqueue("ROCKET IS .......... READY!!!\nMOON ARRIVAL PROBABILITY : " + percent_rocket + "%)");
     UpdateText_Log();
+
     UpdateText_Compound();
     UpdateStatus_LaunchRocket();
 }
@@ -1139,7 +1140,7 @@ function UpdateStatus_QuestCity() {
         field_need.innerHTML = "Complete!"
         field_result.innerHTML
             = dCity[iLevel_City].min + "~" + dCity[iLevel_City].max;
-        document.querySelector("#quest_upgrade_city").style.backgroundColor = cColor.work;
+        document.querySelector("#quest_upgrade_city").style.backgroundColor = cColor.complete;
     }
 }
 function UpdateStatus_QuestPlantation() {
@@ -1170,7 +1171,7 @@ function UpdateStatus_QuestPlantation() {
         field_need.innerHTML = "Complete!"
         field_result.innerHTML
             = dPlantation[iLevel_Plantation].min + "~" + dPlantation[iLevel_Plantation].max;
-        document.querySelector("#quest_upgrade_plantation").style.backgroundColor = cColor.work;
+        document.querySelector("#quest_upgrade_plantation").style.backgroundColor = cColor.complete;
     }
 }
 function UpdateStatus_QuestField() {
@@ -1201,7 +1202,7 @@ function UpdateStatus_QuestField() {
         field_need.innerHTML = "Complete!"
         field_result.innerHTML
             = dField[iLevel_Field].min + "~" + dField[iLevel_Field].max;
-        document.querySelector("#quest_upgrade_field").style.backgroundColor = cColor.work;
+        document.querySelector("#quest_upgrade_field").style.backgroundColor = cColor.complete;
     }
 }
 
@@ -1229,7 +1230,10 @@ function Quest_Mother() {
 
     iCurRabbits.together = 3;
     ShowRabbits();
-    document.getElementById("quest_mother").style.backgroundColor = cColor.work;
+    document.getElementById("quest_mother").style.backgroundColor = cColor.complete;
+
+    queue_log.enqueue("\'THANKS MOM!\' Rabbit brother said\nMom is going to another location to collect");
+    UpdateText_Log();
 }
 
 function UpdateStatus_QuestFather() {
@@ -1266,9 +1270,12 @@ function Quest_Father() {
     iExtraPercent += 5;
     if(iExtraPercent >= 5) {
         iExtraPercent = 5;
-        document.getElementById("quest_father").style.backgroundColor = cColor.work;
+        document.getElementById("quest_father").style.backgroundColor = cColor.complete;
     }
     UpdatePercent_Rocket();
+
+    queue_log.enqueue("\'THANKS DAD!\' Rabbit brother said\nMoon arrival probability + 5%");
+    UpdateText_Log();
 }
 function Quest_Upgrade_City() {
     if(iLevel_City >= 3) {
@@ -1292,6 +1299,10 @@ function Quest_Upgrade_City() {
 
     UpdateText_CityEa();
     UpdateStatus_Quest();
+
+    queue_log.enqueue("LEVEL UP!!!\nCity Lv " 
+    + (iLevel_City - 1) + "=> City Lv " + iLevel_City);
+    UpdateText_Log();
 }
 function Quest_Upgrade_Field() {
     if(iLevel_Field >= 3) {
@@ -1314,6 +1325,10 @@ function Quest_Upgrade_Field() {
     }
     UpdateText_FieldEa();
     UpdateStatus_Quest();
+
+    queue_log.enqueue("LEVEL UP!!!\nField Lv " 
+    + (iLevel_Field - 1) + "=> Field Lv " + iLevel_Field);
+    UpdateText_Log();
 }
 function Quest_Upgrade_Plantation() {
     if(iLevel_Plantation >= 3) {
@@ -1336,6 +1351,10 @@ function Quest_Upgrade_Plantation() {
     }
     UpdateText_PlantationEa();
     UpdateStatus_Quest();
+
+    queue_log.enqueue("LEVEL UP!!!\nPlantation Lv " 
+    + (iLevel_Plantation - 1) + "=> Plantation Lv " + iLevel_Plantation);
+    UpdateText_Log();
 }
 //#endregion
 
