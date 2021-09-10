@@ -372,7 +372,7 @@ function GoToPlantation() {
         var rubber = this.GetRandom(dPlantation[iLevel_Plantation].min, dPlantation[iLevel_Plantation].max);
         AddItem(eItem.rubber, rubber);
     
-        queue_log.enqueue("[Plantation] Rubber : " + rubber);
+        queue_log.enqueue("[PLANTATION] Rubber : " + rubber);
         UpdateText_Log();
 
         BUTTON_Field.style.backgroundColor = cColor.can;
@@ -819,7 +819,7 @@ function CompoundItem_Steel() {
     
     UpdateInput(eCompound.core);
 
-    queue_log.enqueue("<COMPONENT>\nMetal : " + metalCompNum * 15
+    queue_log.enqueue("&lt;COMPONENT&gt;<br />Metal : " + metalCompNum * 15
     + " / Plastic : " + plasticCompNum + " => Steel x" + metalCompNum);
     
     UpdateText_Log();
@@ -859,7 +859,7 @@ function CompoundItem_Fiber() {
     
     UpdateInput(eCompound.parts);
 
-    queue_log.enqueue("<COMPONENT>\nGlass : " + min * 5 + " / Rubber : " + min * 10 
+    queue_log.enqueue("&lt;COMPONENT&gt;<br />Glass : " + min * 5 + " / Rubber : " + min * 10 
     + " / Metal : " + min * 5
     + " => Fiber x" + min);
     
@@ -896,7 +896,7 @@ function CompoundItem_Fuel() {
     
     UpdateInput(eCompound.fuel);
 
-    queue_log.enqueue("<COMPONENT>\nCarrot : " + treeCompNum * 10 + " => Fuel x" + treeCompNum);
+    queue_log.enqueue("&lt;COMPONENT&gt;<br />Carrot : " + treeCompNum * 10 + " => Fuel x" + treeCompNum);
     
     UpdateText_Log();
     UpdateText_Compound();
@@ -978,7 +978,7 @@ function BuildRocket() {
     AddCompound(eCompound.fuel, -Input.fuel);
     ResetInput();
 
-    queue_log.enqueue("ROCKET IS .......... READY!!!\nMOON ARRIVAL PROBABILITY : " + percent_rocket + "%)");
+    queue_log.enqueue("ROCKET IS .......... READY!!!<br />MOON ARRIVAL PROBABILITY : " + percent_rocket + "%)");
     UpdateText_Log();
 
     UpdateText_Compound();
@@ -1232,7 +1232,7 @@ function Quest_Mother() {
     ShowRabbits();
     document.getElementById("quest_mother").style.backgroundColor = cColor.complete;
 
-    queue_log.enqueue("\'THANKS MOM!\' Rabbit brother said\nMom is going to another location to collect");
+    queue_log.enqueue("\'THANKS MOM!\' Rabbit brother said<br />Mom is going to another location to collect");
     UpdateText_Log();
 }
 
@@ -1274,7 +1274,7 @@ function Quest_Father() {
     }
     UpdatePercent_Rocket();
 
-    queue_log.enqueue("\'THANKS DAD!\' Rabbit brother said\nMoon arrival probability + 5%");
+    queue_log.enqueue("\'THANKS DAD!\' Rabbit brother said<br />Moon arrival probability + 5%");
     UpdateText_Log();
 }
 function Quest_Upgrade_City() {
@@ -1300,7 +1300,7 @@ function Quest_Upgrade_City() {
     UpdateText_CityEa();
     UpdateStatus_Quest();
 
-    queue_log.enqueue("LEVEL UP!!!\nCity Lv " 
+    queue_log.enqueue("LEVEL UP!!!<br />City Lv " 
     + (iLevel_City - 1) + "=> City Lv " + iLevel_City);
     UpdateText_Log();
 }
@@ -1326,7 +1326,7 @@ function Quest_Upgrade_Field() {
     UpdateText_FieldEa();
     UpdateStatus_Quest();
 
-    queue_log.enqueue("LEVEL UP!!!\nField Lv " 
+    queue_log.enqueue("LEVEL UP!!!<br />Field Lv " 
     + (iLevel_Field - 1) + "=> Field Lv " + iLevel_Field);
     UpdateText_Log();
 }
@@ -1352,7 +1352,7 @@ function Quest_Upgrade_Plantation() {
     UpdateText_PlantationEa();
     UpdateStatus_Quest();
 
-    queue_log.enqueue("LEVEL UP!!!\nPlantation Lv " 
+    queue_log.enqueue("LEVEL UP!!!<br />Plantation Lv " 
     + (iLevel_Plantation - 1) + "=> Plantation Lv " + iLevel_Plantation);
     UpdateText_Log();
 }
