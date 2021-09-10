@@ -839,7 +839,7 @@ function UpdateText_CompoundSteel() {
 
 // #region Compound : Fiber
 function CompoundItem_Fiber() {
-    var glassCompNum = parseInt(Item.glass / 5);
+    var glassCompNum = parseInt(Item.glass / 15);
     var rubberTreeCompNum = parseInt(Item.rubber / 10);
     var metalCompNum = parseInt(Item.metal / 5);
     
@@ -848,7 +848,7 @@ function CompoundItem_Fiber() {
     if(min <= 0)
         return;
 
-    AddItem(eItem.glass, -min * 5);
+    AddItem(eItem.glass, -min * 15);
     AddItem(eItem.rubber, -min * 10);
     AddItem(eItem.metal, -min * 5);
     
@@ -859,7 +859,7 @@ function CompoundItem_Fiber() {
     
     UpdateInput(eCompound.parts);
 
-    queue_log.enqueue("&lt;COMPONENT&gt;<br />Glass : " + min * 5 + " / Rubber : " + min * 10 
+    queue_log.enqueue("&lt;COMPONENT&gt;<br />Glass : " + min * 15 + " / Rubber : " + min * 10 
     + " / Metal : " + min * 5
     + " => Fiber x" + min);
     
@@ -869,11 +869,11 @@ function CompoundItem_Fiber() {
 function UpdateText_CompoundFiber() {
     var TEXT_Field = document.getElementById(pCompoundButton.parts);
     TEXT_Field.innerHTML
-    = "Glass " + Item.glass + "/5 | "
+    = "Glass " + Item.glass + "/15 | "
     + "Rubber " + Item.rubber + "/10 | "
     + "Metal " + Item.metal + "/5";
 
-    if(Item.glass >= 5
+    if(Item.glass >= 15
         && Item.rubber >= 10
         && Item.metal >= 5)
         TEXT_Field.style.backgroundColor = cColor.can;
