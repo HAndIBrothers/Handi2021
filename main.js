@@ -338,8 +338,8 @@ const dPlantation = {
         }
     },
     2 : {
-        min : 3,
-        max : 12,
+        min : 6,
+        max : 24,
         Need : {
             core : 6,
             parts : 7,
@@ -347,8 +347,8 @@ const dPlantation = {
         }
     },
     3 : {
-        min : 6,
-        max : 24,
+        min : 12,
+        max : 48,
         Need : {
             core : 9999,
             parts : 9999,
@@ -389,8 +389,8 @@ function UpdateText_PlantationEa() {
 var iLevel_City;
 const dCity = {
     0 : {
-        min : 1,
-        max : 3,
+        min : 2,
+        max : 6,
         Need : {
             core : 3,
             parts : 1,
@@ -398,8 +398,8 @@ const dCity = {
         }
     },
     1 : {
-        min : 2,
-        max : 6,
+        min : 4,
+        max : 12,
         Need : {
             core : 5,
             parts : 3,
@@ -407,8 +407,8 @@ const dCity = {
         }
     },
     2 : {
-        min : 3,
-        max : 12,
+        min : 6,
+        max : 24,
         Need : {
             core : 7,
             parts : 5,
@@ -416,8 +416,8 @@ const dCity = {
         }
     },
     3 : {
-        min : 6,
-        max : 24,
+        min : 12,
+        max : 48,
         Need : {
             core : 9999,
             parts : 9999,
@@ -483,8 +483,8 @@ const dField = {
         }
     },
     2 : {
-        min : 3,
-        max : 12,
+        min : 6,
+        max : 24,
         Need : {
             core : 5,
             parts : 6,
@@ -492,8 +492,8 @@ const dField = {
         }
     },
     3 : {
-        min : 6,
-        max : 24,
+        min : 12,
+        max : 48,
         Need : {
             core : 9999,
             parts : 9999,
@@ -1023,7 +1023,6 @@ function LaunchRocket() {
         this.result_rocket = true;
     else {
         this.result_rocket = false;
-        count_return_rocket += 1;
         if(!iComeFather) {
             if(count_return_rocket >= 1
                 && iCurRabbits.together == 3) {
@@ -1232,6 +1231,10 @@ function Quest_Mother() {
     ShowRabbits();
     document.getElementById("quest_mother").style.backgroundColor = cColor.complete;
 
+    rabbit_count += 1;
+    off_scene02();
+    scene02_ingame();
+
     queue_log.enqueue("\'THANKS MOM!\' Rabbit brother said<br />Mom is going to another location to collect");
     UpdateText_Log();
 }
@@ -1273,6 +1276,10 @@ function Quest_Father() {
         document.getElementById("quest_father").style.backgroundColor = cColor.complete;
     }
     UpdatePercent_Rocket();
+
+    rabbit_count += 1;
+    off_scene02();
+    scene02_ingame();
 
     queue_log.enqueue("\'THANKS DAD!\' Rabbit brother said<br />Moon arrival probability + 5%");
     UpdateText_Log();
