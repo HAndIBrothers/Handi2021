@@ -943,6 +943,13 @@ function UpdateStatus_BuildRocket() {
     }
     document.getElementById("button_build_rocket").style.backgroundColor = cColor.can;
 }
+
+var dPrev = {
+    core : 0,
+    parts : 0,
+    fuel : 0,
+    percent : 0
+}
 function BuildRocket() {
     if(Input.core <= 0
         || Input.parts <= 0
@@ -973,6 +980,11 @@ function BuildRocket() {
 
     percent_rocket = (coreDif + partsDif + fuelDif) / 3;
     percent_rocket = parseInt(percent_rocket);
+
+    dPrev.core = Input.core;
+    dPrev.parts = Input.parts;
+    dPrev.fuel = Input.fuel;
+    dPrev.percent = percent_rocket;
     
     UpdatePercent_Rocket();
     
