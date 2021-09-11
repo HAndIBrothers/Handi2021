@@ -9,8 +9,7 @@ let status_number = 1;
 let is_launch_progress = false;
 let launch_percent;
 function launch_rocket() {
-    // launch_percent = GetPercent().percent + iExtraPercent;
-    launch_percent = 100;
+    launch_percent = GetPercent().percent + iExtraPercent;
     if(launch_percent < 1) {
         return;
     }
