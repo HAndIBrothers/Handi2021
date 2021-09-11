@@ -130,7 +130,7 @@ button:hover {
 .field_input_item {
   display: flex;
   flex-direction: row;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .field_input_item > button,
@@ -224,6 +224,7 @@ span {
   margin: 0px auto;
   margin-top: 10px;
   width: 240px;
+  height: 65px;
 }
 
 #field_down_mid {

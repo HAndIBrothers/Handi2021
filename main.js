@@ -948,6 +948,9 @@ function BuildRocket() {
         || Input.parts <= 0
         || Input.fuel <= 0)
         return;
+    
+    if(percent_rocket > 0)
+        return;
 
     // :: 여기 하는 중
     var checkCore = Input.core > cNeed.core ? cNeed.core - (Input.core - cNeed.core) : Input.core;
