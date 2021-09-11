@@ -70,6 +70,10 @@ button:hover {
   height: 200px;
 }
 
+.text_important {
+  background-color: #FC5130;
+}
+
 #field_rocket {
   display: flex;
   flex-direction: column;

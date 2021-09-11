@@ -1098,7 +1098,12 @@ function UpdateText_Log() {
 
     // :: String
     for(var index = 0; index < count; index++) {
-        stringData += `<div class="text_log">${tempStack.pop()}</div>`;
+        var tempString = tempStack.pop();
+        if(tempString.includes('@')) {
+            stringData += `<div class="text_log text_important">${tempString}</div>`;
+        } else {
+            stringData += `<div class="text_log">${tempString}</div>`;
+        }
     }
     
     TEXT_Field.innerHTML = stringData;
@@ -1238,7 +1243,7 @@ function Quest_Mother() {
     off_scene02();
     scene02_ingame();
 
-    queue_log.enqueue("\'THANKS MOM!\' Rabbit brother said<br />Mom is going to another location to collect");
+    queue_log.enqueue("@\'THANKS MOM!\' Rabbit brother said<br />Mom is going to another location to collect");
     UpdateText_Log();
 }
 
@@ -1284,7 +1289,7 @@ function Quest_Father() {
     off_scene02();
     scene02_ingame();
 
-    queue_log.enqueue("\'THANKS DAD!\' Rabbit brother said<br />Moon arrival probability + 5%");
+    queue_log.enqueue("@\'THANKS DAD!\' Rabbit brother said<br />Moon arrival probability + 5%");
     UpdateText_Log();
 }
 function Quest_Upgrade_City() {
@@ -1373,4 +1378,9 @@ function GetPercent() {
         percent: percent_rocket
     }
     return note;
+}
+
+function SetLog(log) {
+    queue_log.enqueue(log);
+    UpdateText_Log();
 }
