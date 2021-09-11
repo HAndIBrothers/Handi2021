@@ -1119,8 +1119,10 @@ function UpdateText_Log() {
         }
     }
     
-    TEXT_Field.innerHTML = stringData;
-    UpdateStatus_Quest();
+    if(TEXT_Field != null) {
+        TEXT_Field.innerHTML = stringData;
+        UpdateStatus_Quest();
+    }
 }
 //#endregion
 
