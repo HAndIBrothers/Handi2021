@@ -1112,6 +1112,7 @@ function UpdateText_Log() {
     for(var index = 0; index < count; index++) {
         var tempString = tempStack.pop();
         if(tempString.includes('@')) {
+            tempString = tempString.replace('@', '');
             stringData += `<div class="text_log text_important">${tempString}</div>`;
         } else {
             stringData += `<div class="text_log">${tempString}</div>`;
