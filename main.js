@@ -981,7 +981,7 @@ function BuildRocket() {
     AddCompound(eCompound.fuel, -Input.fuel);
     ResetInput();
 
-    queue_log.enqueue("ROCKET IS .......... READY!!!<br />MOON ARRIVAL PROBABILITY : " + percent_rocket + "%)");
+    queue_log.enqueue("ROCKET IS .......... READY!!!<br />MOON ARRIVAL PROBABILITY : " + percent_rocket + "%");
     UpdateText_Log();
 
     UpdateText_Compound();
