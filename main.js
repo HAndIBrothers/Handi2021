@@ -85,7 +85,7 @@ function Open() {
 function ShowEnding() {
     var scene =
 `
-<pre>
+<pre id="ending_center">
 
 
 THANK YOU FOR PLAYING!

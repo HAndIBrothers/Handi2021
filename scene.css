@@ -1,5 +1,4 @@
 ﻿#scene01_container {
-  /* font-family: "Courier New", Courier, monospace; */
   font-family: "system-ui";
   width: 468px;
   height: 100%;
@@ -28,7 +27,6 @@
 }
 
 #scene02_container {
-  /* font-family: "Courier New", Courier, monospace; */
   font-family: "system-ui";
   width: 100%;
   height: 100%;

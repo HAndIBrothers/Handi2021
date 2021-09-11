@@ -1,10 +1,5 @@
 ﻿
-// queue_log.enqueue("Rocket Launched : " + (this.result_rocket ? "발사 성공" : "발사 실패"));
-// UpdateText_Log();
-// ResetPercent_Rocket()
-
 // LAUNCH => PROPULSION => ENTER MOON
-
 let rocket_status = {
     1: 'LAUNCH',
     2: 'PROPULSION',
@@ -14,8 +9,8 @@ let status_number = 1;
 let is_launch_progress = false;
 let launch_percent;
 function launch_rocket() {
-    launch_percent = GetPercent().percent;
-    // launch_percent = 10
+    // launch_percent = GetPercent().percent + iExtraPercent;
+    launch_percent = 100;
     if(launch_percent < 1) {
         return;
     }
@@ -60,9 +55,12 @@ function launch_result() {
     }
     queue_log.enqueue(rocket_result ?
         `${rocket_status[status_number]} SUCESSED!!!!!` :
-        `${rocket_status[status_number]} FAILED.. It's Okay, We go again!`)
+        `${rocket_status[status_number]} FAILED.. It's Okay, We go again!`
+        )
+        
     UpdateText_Log()
-
+    SetLog(`@※MUST REMEMBER※<br>
+    Core : ${dPrev.core}| Parts : ${dPrev.parts} | Fuel : ${dPrev.fuel}  => ${dPrev.percent}%`)
     if(rocket_result) {
         status_number++
         if(status_number > 3) {
@@ -74,7 +72,7 @@ function launch_result() {
             rocket_countdown();
         }
     }
-    // 실패.. 인게임으로 돌아간다.
+    // Fail, goes to ingame
     else {
         status_number = 1;
         is_launch_progress = false
